@@ -3,8 +3,6 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -26,7 +24,9 @@ export async function POST(req: NextRequest) {
       data: { nom, studio, email, telephone, site, projet, message },
     })
 
-    if (process.env.RESEND_API_KEY) {
+    const resendKey = process.env.RESEND_API_KEY
+    if (resendKey) {
+      const resend = new Resend(resendKey)
       const lignes = [
         `<b>Nom :</b> ${nom}`,
         studio ? `<b>Studio :</b> ${studio}` : null,

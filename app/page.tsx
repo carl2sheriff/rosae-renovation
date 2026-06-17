@@ -51,7 +51,7 @@ const projects = [
     type: "Rénovation intérieure",
     size: "180 m²",
     image:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505409628601-edc9af17fda6?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Bureaux — Paris 8e",

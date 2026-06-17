@@ -17,7 +17,6 @@ export interface Config {
     services: Service
     engagements: Engagement
     temoignages: Temoignage
-    articles: Article
     inquiries: Inquiry
     'payload-preferences': PayloadPreference
     'payload-migrations': PayloadMigration
@@ -180,34 +179,6 @@ export interface Temoignage {
   note?: ('5' | '4' | '3') | null
   published?: boolean | null
   order?: number | null
-  updatedAt: string
-  createdAt: string
-}
-
-export interface Article {
-  id: number
-  title: string
-  excerpt?: string | null
-  cover_image?: number | Media | null
-  contenu?: {
-    root: {
-      type: string
-      children: {
-        type: string
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  } | null
-  categorie?: ('actualites' | 'conseil' | 'chantier' | 'materiaux') | null
-  slug: string
-  published?: boolean | null
-  date_publication?: string | null
   updatedAt: string
   createdAt: string
 }

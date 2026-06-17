@@ -2,25 +2,11 @@ export default function RosaeHomepageDemo() {
   return (
     <div className="min-h-screen bg-[#F7F7F5] text-[#1A1A1A]">
 
-      {/* HERO FULL IMAGE WITH LOGO */}
-      <section className="w-full">
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80"
-            alt="Intérieur rénové lumineux"
-            className="h-[70vh] w-full object-cover"
-          />
-          <div className="absolute top-6 left-6 text-sm tracking-[0.05em] md:text-base">
-            ROSAE
-          </div>
-        </div>
-      </section>
-
-      <header className="w-full border-b border-[#E5E5E5] bg-[#F7F7F5]">
+      <header className="sticky top-0 z-50 w-full border-b border-[#E5E5E5] bg-[#F7F7F5]/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div className="text-sm md:text-base">
-            Rénovation d&apos;intérieurs à Paris et en Île-de-France
+          <div className="flex items-center gap-8">
+            <span className="text-sm tracking-[0.05em] md:text-base font-medium">ROSAE</span>
+            <span className="hidden text-sm text-[#6F6F6F] md:block">Rénovation d&apos;intérieurs à Paris et en Île-de-France</span>
           </div>
           <nav className="hidden gap-8 text-sm md:flex">
             <a href="#accueil" className="hover:opacity-70">Accueil</a>
@@ -31,6 +17,16 @@ export default function RosaeHomepageDemo() {
           </nav>
         </div>
       </header>
+
+      {/* HERO FULL IMAGE */}
+      <section className="w-full">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80"
+          alt="Intérieur rénové lumineux"
+          className="h-[70vh] w-full object-cover"
+        />
+      </section>
 
       <main id="accueil">
         <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">

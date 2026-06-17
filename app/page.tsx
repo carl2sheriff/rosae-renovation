@@ -168,7 +168,7 @@ export default function RosaePage() {
       <section className="relative overflow-hidden" style={{ height: "88vh" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1800&q=85"
+          src="https://images.unsplash.com/photo-1644589104114-41ea93fc02e7?auto=format&fit=crop&w=1800&q=85"
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover"

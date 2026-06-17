@@ -44,7 +44,7 @@ const projects = [
     type: "Rénovation complète",
     size: "120 m²",
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=82",
+      "https://images.unsplash.com/photo-1505410603994-c3ac6269711f?auto=format&fit=crop&w=1400&q=85",
   },
   {
     title: "Maison — Neuilly-sur-Seine",

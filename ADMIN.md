@@ -171,6 +171,38 @@ N'hésitez pas à contacter Carl pour :
 
 ---
 
+## 5b. Ajouter un témoignage client
+
+Les témoignages apparaissent sur la page d'accueil (section « Ce que disent nos clients »), dans l'ordre défini.
+
+1. Dans le menu de gauche, cliquez sur **Témoignages**
+2. Cliquez sur **Créer un nouveau Témoignage**
+3. Remplissez les champs :
+   - **Nom du client** — prénom ou initiales (ex : *Marie D.*)
+   - **Projet** — référence optionnelle (ex : *Appartement — Paris 7e*)
+   - **Texte du témoignage** — la citation complète
+   - **Note** — 3/5, 4/5 ou 5/5 (optionnel)
+4. Dans la colonne de droite :
+   - **Publié** — cochez pour afficher sur le site
+   - **Ordre d'affichage** — 1 = premier affiché
+5. Cliquez sur **Sauvegarder les modifications**
+
+> Si aucun témoignage n'est publié, la section n'apparaît pas sur la page d'accueil.
+
+---
+
+## 5c. Consulter les demandes de contact (formulaire)
+
+Les prospects qui remplissent le formulaire sur la page Contact sont enregistrés dans l'admin.
+
+1. Dans le menu de gauche, section **Administration**, cliquez sur **Demandes de contact**
+2. Chaque entrée contient : nom, email, téléphone, message, type de projet, date de réception
+3. Vous pouvez les consulter ou les supprimer depuis cet écran
+
+> **Ces demandes ne sont pas envoyées par email automatiquement.** Pensez à consulter l'admin régulièrement, ou contactez Carl pour mettre en place une notification email.
+
+---
+
 ## Récapitulatif rapide
 
 | Action | Où aller dans l'admin |
@@ -183,4 +215,6 @@ N'hésitez pas à contacter Carl pour :
 | Ajouter / modifier un projet | Contenu → Réalisations |
 | Modifier un service | Contenu → Services |
 | Modifier un engagement | Contenu → Engagements |
+| Ajouter un témoignage | Contenu → Témoignages |
+| Voir les demandes de contact | Administration → Demandes de contact |
 | Gérer les photos | Contenu → Médias |

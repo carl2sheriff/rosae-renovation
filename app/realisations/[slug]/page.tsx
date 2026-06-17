@@ -250,11 +250,22 @@ export default async function RealisationDetail({
     data.architecte && { label: "Architecte", value: data.architecte },
   ].filter(Boolean) as { label: string; value: string }[];
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: `${process.env.NEXT_PUBLIC_SERVER_URL || "https://rosae-renovation.fr"}/` },
+      { "@type": "ListItem", position: 2, name: "Réalisations", item: `${process.env.NEXT_PUBLIC_SERVER_URL || "https://rosae-renovation.fr"}/realisations` },
+      { "@type": "ListItem", position: 3, name: data.title },
+    ],
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <SiteNav activePath="/realisations" />
 
-      <main>
+      <main id="main-content">
         {/* ── Hero image ──────────────────────────── */}
         <div className="relative overflow-hidden" style={{ height: "clamp(340px, 62vh, 720px)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

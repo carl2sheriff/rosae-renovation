@@ -75,3 +75,29 @@ body {
 .back-link:hover {
   color: var(--text-1) !important;
 }
+
+/* ─── Skip to content ────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--text-1);
+  color: var(--bg);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ─── Focus visible ──────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}

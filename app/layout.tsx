@@ -59,12 +59,19 @@ export default function RootLayout({
       className={`${ebGaramond.variable} ${inter.variable} h-full`}
     >
       <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://app.cal.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full antialiased">{children}</body>
+      <body className="min-h-full antialiased">
+        <a href="#main-content" className="skip-link">
+          Aller au contenu
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

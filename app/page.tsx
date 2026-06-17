@@ -51,7 +51,7 @@ const projects = [
     type: "Rénovation intérieure",
     size: "180 m²",
     image:
-      "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Bureaux — Paris 8e",
@@ -168,7 +168,7 @@ export default function RosaePage() {
       <section className="relative overflow-hidden" style={{ height: "88vh" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1800&q=85"
+          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1800&q=85"
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover"

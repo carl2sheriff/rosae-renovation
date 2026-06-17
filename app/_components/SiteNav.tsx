@@ -6,6 +6,7 @@ const navLinks: [string, string][] = [
   ["Studio", "/studio"],
   ["Méthode", "/methode"],
   ["Réalisations", "/realisations"],
+  ["Journal", "/journal"],
   ["Contact", "/contact"],
 ];
 

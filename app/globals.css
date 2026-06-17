@@ -106,3 +106,29 @@ body {
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary::marker { display: none; }
 details[open] > summary .faq-plus { transform: rotate(45deg); }
+
+/* ─── Article rich text ──────────────────────────────────── */
+.prose-article p { margin-bottom: 1.4em; }
+.prose-article h2, .prose-article h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  line-height: 1.2;
+}
+.prose-article h2 { font-size: clamp(18px, 2vw, 24px); }
+.prose-article h3 { font-size: clamp(15px, 1.5vw, 18px); }
+.prose-article ul, .prose-article ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.4em;
+}
+.prose-article li { margin-bottom: 0.4em; }
+.prose-article a { color: var(--accent); text-decoration: underline; }
+.prose-article strong { font-weight: 600; }
+.prose-article blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.2em;
+  color: var(--text-2);
+  font-style: italic;
+  margin: 1.6em 0;
+}

@@ -355,6 +355,77 @@ export default buildConfig({
       ],
     },
 
+    /* Articles du journal */
+    {
+      slug: 'articles',
+      labels: {
+        singular: 'Article',
+        plural: 'Articles',
+      },
+      admin: {
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'categorie', 'published', 'date_publication'],
+        group: 'Contenu',
+      },
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+          label: 'Titre de l\'article',
+        },
+        {
+          name: 'excerpt',
+          type: 'textarea',
+          label: 'Résumé (affiché dans la liste)',
+        },
+        {
+          name: 'cover_image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Image de couverture',
+        },
+        {
+          name: 'contenu',
+          type: 'richText',
+          editor: lexicalEditor({}),
+          label: 'Contenu de l\'article',
+        },
+        {
+          name: 'categorie',
+          type: 'select',
+          label: 'Catégorie',
+          options: [
+            { label: 'Actualités', value: 'actualites' },
+            { label: 'Conseil technique', value: 'conseil' },
+            { label: 'Vie de chantier', value: 'chantier' },
+            { label: 'Matériaux & finitions', value: 'materiaux' },
+          ],
+        },
+        {
+          name: 'slug',
+          type: 'text',
+          required: true,
+          unique: true,
+          admin: { position: 'sidebar' },
+          label: 'Identifiant URL',
+        },
+        {
+          name: 'published',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: { position: 'sidebar' },
+          label: 'Publié',
+        },
+        {
+          name: 'date_publication',
+          type: 'date',
+          admin: { position: 'sidebar' },
+          label: 'Date de publication',
+        },
+      ],
+    },
+
     /* Demandes de contact */
     {
       slug: 'inquiries',

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /* ─── Scroll fade-in wrapper ─────────────────────────────── */
 function FadeIn({
@@ -108,6 +108,8 @@ const navItems: [string, string][] = [
 
 /* ─── Page ───────────────────────────────────────────────── */
 export default function RosaePage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div
       className="min-h-screen"
@@ -130,6 +132,7 @@ export default function RosaePage() {
             href="#"
             className="font-serif italic tracking-[0.05em] text-[15px]"
             style={{ color: "var(--text-1)" }}
+            onClick={() => setMenuOpen(false)}
           >
             ROSAE
           </a>
@@ -153,13 +156,61 @@ export default function RosaePage() {
             ))}
           </nav>
 
-          <span
-            className="text-[11px] md:hidden"
-            style={{ color: "var(--text-2)" }}
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden flex flex-col justify-center gap-[5px] w-6 h-6"
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
           >
-            Paris & IDF
-          </span>
+            <span
+              className="block h-px w-full transition-all duration-300 origin-center"
+              style={{
+                backgroundColor: "var(--text-1)",
+                transform: menuOpen ? "translateY(5px) rotate(45deg)" : "none",
+              }}
+            />
+            <span
+              className="block h-px w-full transition-all duration-300"
+              style={{
+                backgroundColor: "var(--text-1)",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              className="block h-px w-full transition-all duration-300 origin-center"
+              style={{
+                backgroundColor: "var(--text-1)",
+                transform: menuOpen ? "translateY(-5px) rotate(-45deg)" : "none",
+              }}
+            />
+          </button>
         </div>
+
+        {/* Mobile nav overlay */}
+        {menuOpen && (
+          <div
+            className="md:hidden border-t"
+            style={{
+              borderColor: "var(--line)",
+              background: "color-mix(in srgb, var(--bg) 97%, transparent)",
+            }}
+          >
+            <nav className="mx-auto max-w-6xl flex flex-col px-6 py-6 gap-6">
+              {navItems.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-[13px] uppercase tracking-[0.13em]"
+                  style={{ color: "var(--text-1)" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* ══════════════════════════════════════════

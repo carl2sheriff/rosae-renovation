@@ -2,7 +2,7 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { SiteNav } from "@/app/_components/SiteNav";
 import { SiteFooter } from "@/app/_components/SiteFooter";
-import { CalendlyEmbed } from "@/app/_components/CalendlyEmbed";
+import { CalComEmbed } from "@/app/_components/CalComEmbed";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +19,7 @@ interface ContactData {
   phone: string;
   email: string;
   address?: string;
+  calendarUrl?: string;
 }
 
 const FALLBACK: ContactData = {
@@ -39,6 +40,7 @@ async function getContact(): Promise<ContactData> {
       phone: contact.phone ?? FALLBACK.phone,
       email: contact.email ?? FALLBACK.email,
       address: contact.address ?? undefined,
+      calendarUrl: contact.calendar_url ?? undefined,
     };
   } catch {
     return FALLBACK;
@@ -47,7 +49,6 @@ async function getContact(): Promise<ContactData> {
 
 export default async function ContactPage() {
   const contact = await getContact();
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}>
@@ -133,7 +134,7 @@ export default async function ContactPage() {
           </div>
         </section>
 
-        {/* ── Calendly / Rendez-vous ───────────────── */}
+        {/* ── Rendez-vous ──────────────────────────── */}
         <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">
           <div
             className="border-t pt-12"
@@ -152,17 +153,36 @@ export default async function ContactPage() {
                 lineHeight: 1.25,
               }}
             >
-              Planifier une visite de chantier
+              Planifier une première visite
             </h2>
             <p
               className="text-sm leading-[1.9] mb-8 max-w-md"
               style={{ color: "var(--text-2)" }}
             >
-              Sélectionnez un créneau directement dans notre calendrier pour
-              convenir d&apos;une première visite sur site.
+              Sélectionnez un créneau dans notre calendrier pour convenir
+              d&apos;une première rencontre sur site.
             </p>
 
-            <CalendlyEmbed url={calendlyUrl} />
+            {contact.calendarUrl ? (
+              <CalComEmbed calLink={contact.calendarUrl} />
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={`tel:${(contact.phone ?? "").replace(/\s/g, "")}`}
+                  className="inline-block text-[11px] uppercase tracking-[0.18em] border px-6 py-3 transition-all duration-300 hover:bg-[var(--text-1)] hover:text-[var(--bg)]"
+                  style={{ borderColor: "var(--text-1)", color: "var(--text-1)" }}
+                >
+                  Appeler
+                </a>
+                <a
+                  href={`mailto:${contact.email ?? ""}`}
+                  className="inline-block text-[11px] uppercase tracking-[0.18em] border px-6 py-3 transition-all duration-300 hover:bg-[var(--text-1)] hover:text-[var(--bg)]"
+                  style={{ borderColor: "var(--text-1)", color: "var(--text-1)" }}
+                >
+                  Écrire
+                </a>
+              </div>
+            )}
           </div>
         </section>
       </main>

@@ -144,6 +144,75 @@ export default buildConfig({
           },
           label: 'Publié (visible sur le site)',
         },
+        {
+          name: 'featured',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: {
+            position: 'sidebar',
+          },
+          label: 'Mis en avant (page projets)',
+        },
+        {
+          name: 'lieu',
+          type: 'text',
+          label: 'Lieu (ex : Paris 7e)',
+        },
+        {
+          name: 'surface',
+          type: 'number',
+          label: 'Surface (m²)',
+        },
+        {
+          name: 'duree',
+          type: 'text',
+          label: 'Durée des travaux (ex : 14 semaines)',
+        },
+        {
+          name: 'annee',
+          type: 'number',
+          label: 'Année de livraison',
+        },
+        {
+          name: 'type_intervention',
+          type: 'select',
+          label: "Type d'intervention",
+          options: [
+            { label: 'Rénovation complète', value: 'renovation_complete' },
+            { label: 'Rénovation partielle', value: 'renovation_partielle' },
+            { label: 'Aménagement', value: 'amenagement' },
+            { label: 'Restauration', value: 'restauration' },
+          ],
+        },
+        {
+          name: 'architecte_associe',
+          type: 'text',
+          label: 'Architecte associé (optionnel)',
+        },
+        {
+          name: 'photographe',
+          type: 'text',
+          label: 'Crédit photographe (optionnel)',
+        },
+        {
+          name: 'narration',
+          type: 'richText',
+          editor: lexicalEditor({}),
+          label: 'Description narrative du projet',
+        },
+        {
+          name: 'points_cles',
+          type: 'array',
+          label: 'Points clés (liste à puces)',
+          fields: [
+            {
+              name: 'texte',
+              type: 'text',
+              required: true,
+              label: 'Point clé',
+            },
+          ],
+        },
       ],
     },
 
@@ -256,6 +325,23 @@ export default buildConfig({
           type: 'textarea',
           label: 'Citation barre gauche (texte encadré)',
         },
+        {
+          name: 'citation_texte',
+          type: 'textarea',
+          label: 'Citation fondateur (texte)',
+        },
+        {
+          name: 'citation_auteur_nom',
+          type: 'text',
+          label: 'Nom de l\'auteur de la citation',
+          defaultValue: 'Stéphane Beilin',
+        },
+        {
+          name: 'citation_auteur_titre',
+          type: 'text',
+          label: 'Titre de l\'auteur',
+          defaultValue: 'Fondateur · Rosae',
+        },
       ],
     },
 
@@ -291,6 +377,14 @@ export default buildConfig({
           name: 'address',
           type: 'text',
           label: 'Adresse (optionnel)',
+        },
+        {
+          name: 'calendar_url',
+          type: 'text',
+          label: 'Lien Cal.com (ex : rosae-renovation/devis)',
+          admin: {
+            description: 'Partie après cal.com/ dans votre lien de réservation. Laisser vide pour désactiver le calendrier en ligne.',
+          },
         },
       ],
     },

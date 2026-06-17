@@ -119,6 +119,33 @@ export interface Realisation {
   slug: string
   order?: number | null
   published?: boolean | null
+  featured?: boolean | null
+  lieu?: string | null
+  surface?: number | null
+  duree?: string | null
+  annee?: number | null
+  type_intervention?: ('renovation_complete' | 'renovation_partielle' | 'amenagement' | 'restauration') | null
+  architecte_associe?: string | null
+  photographe?: string | null
+  narration?: {
+    root: {
+      type: string
+      children: {
+        type: string
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
+  points_cles?: {
+    texte: string
+    id?: string | null
+  }[] | null
   updatedAt: string
   createdAt: string
 }
@@ -183,6 +210,9 @@ export interface Home {
     [k: string]: unknown
   } | null
   comprehension_text?: string | null
+  citation_texte?: string | null
+  citation_auteur_nom?: string | null
+  citation_auteur_titre?: string | null
   updatedAt?: string | null
   createdAt?: string | null
 }
@@ -194,6 +224,7 @@ export interface Contact {
   phone?: string | null
   email?: string | null
   address?: string | null
+  calendar_url?: string | null
   updatedAt?: string | null
   createdAt?: string | null
 }

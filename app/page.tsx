@@ -133,6 +133,15 @@ async function fetchData(): Promise<HomePageProps | null> {
           undefined
         : undefined;
 
+    const citation =
+      home.citation_texte
+        ? {
+            texte: home.citation_texte,
+            auteurNom: home.citation_auteur_nom ?? "Stéphane Beilin",
+            auteurTitre: home.citation_auteur_titre ?? "Fondateur · Rosae",
+          }
+        : undefined;
+
     return {
       projects: projects.length > 0 ? projects : FALLBACK.projects,
       services: serviceCards.length > 0 ? serviceCards : FALLBACK.services,
@@ -145,6 +154,7 @@ async function fetchData(): Promise<HomePageProps | null> {
         email: contact.email ?? FALLBACK.contact.email,
       },
       heroImageUrl,
+      citation,
     };
   } catch {
     return null;

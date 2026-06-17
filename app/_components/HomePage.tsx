@@ -72,6 +72,11 @@ export interface HomePageProps {
   engagements: EngagementCard[];
   contact: ContactData;
   heroImageUrl?: string;
+  citation?: {
+    texte: string;
+    auteurNom: string;
+    auteurTitre: string;
+  };
 }
 
 /* ─── Page component ──────────────────────────────────────── */
@@ -81,6 +86,7 @@ export function HomePage({
   engagements,
   contact,
   heroImageUrl,
+  citation,
 }: HomePageProps) {
   return (
     <div
@@ -168,20 +174,31 @@ export function HomePage({
         </FadeIn>
 
         <FadeIn delay={160} className="mt-10 md:mt-14">
-          <div
-            className="max-w-[540px] border-l pl-6"
+          <blockquote
+            className="max-w-[560px] border-l-[1.5px] pl-6"
             style={{ borderColor: "var(--accent)" }}
           >
             <p
-              className="text-sm leading-[1.9]"
-              style={{ color: "var(--text-2)" }}
+              className="font-serif italic leading-[1.85]"
+              style={{ fontSize: "clamp(14px, 1.3vw, 17px)", color: "var(--text-2)" }}
             >
-              Un projet réussi repose sur une bonne compréhension dès le départ.
-              Nous prenons le temps d&apos;échanger, de poser les points clés et
-              de valider les choix — pour assurer une exécution fidèle et un
-              déroulement maîtrisé jusqu&apos;à la livraison.
+              {citation?.texte ||
+                "Un projet réussi commence bien avant le premier coup de marteau. Nous prenons le temps d’écouter, de comprendre l’intention, d’éclaircir chaque choix avant qu’il ne devienne une décision. Cette rigueur en amont, c’est ce qui permet d’arriver à la livraison sans aucune surprise — pour le client comme pour ses architectes."}
             </p>
-          </div>
+            <footer className="mt-5">
+              <p
+                className="text-[10px] uppercase tracking-[0.14em]"
+                style={{ color: "var(--accent)" }}
+              >
+                — {citation?.auteurNom || "Stéphane Beilin"}
+                {(citation?.auteurTitre || "Fondateur · Rosae") && (
+                  <span style={{ color: "var(--text-2)" }}>
+                    {" "}/ {citation?.auteurTitre || "Fondateur · Rosae"}
+                  </span>
+                )}
+              </p>
+            </footer>
+          </blockquote>
         </FadeIn>
       </section>
 

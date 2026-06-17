@@ -20,7 +20,8 @@ const FALLBACK_PROJECTS = [
     subtitle: "Rénovation complète",
     size: "120 m²",
     imageUrl:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85",
+    featured: true,
   },
   {
     slug: "maison-neuilly",
@@ -28,7 +29,8 @@ const FALLBACK_PROJECTS = [
     subtitle: "Rénovation intérieure",
     size: "180 m²",
     imageUrl:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85",
+    featured: true,
   },
   {
     slug: "bureaux-paris-8",
@@ -37,6 +39,7 @@ const FALLBACK_PROJECTS = [
     size: "",
     imageUrl:
       "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+    featured: false,
   },
   {
     slug: "appartement-neuilly",
@@ -45,6 +48,7 @@ const FALLBACK_PROJECTS = [
     size: "95 m²",
     imageUrl:
       "https://images.unsplash.com/photo-1618219944342-824e40a13285?auto=format&fit=crop&w=900&q=85",
+    featured: false,
   },
   {
     slug: "villa-saint-cloud",
@@ -53,6 +57,7 @@ const FALLBACK_PROJECTS = [
     size: "240 m²",
     imageUrl:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85",
+    featured: false,
   },
   {
     slug: "appartement-paris-16",
@@ -61,6 +66,7 @@ const FALLBACK_PROJECTS = [
     size: "75 m²",
     imageUrl:
       "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=900&q=85",
+    featured: false,
   },
 ];
 
@@ -87,6 +93,7 @@ async function getProjects() {
         subtitle: parts[0] ?? "",
         size: parts[1] ?? "",
         imageUrl: mediaUrl(r.cover_image as Media | number),
+        featured: r.featured ?? false,
       };
     });
   } catch {
@@ -124,12 +131,16 @@ export default async function RealisationsPage() {
         {/* ── Grid ────────────────────────────────── */}
         <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">
           <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
-            {list.map((p) => (
+            {list.map((p, i) => (
               <a
                 key={p.slug || p.title}
                 href={`/realisations/${p.slug}`}
                 className="group block"
-                style={{ color: "inherit", textDecoration: "none" }}
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  gridColumn: p.featured ? "1 / -1" : undefined,
+                }}
               >
                 <div className="overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -139,12 +150,24 @@ export default async function RealisationsPage() {
                       "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80"
                     }
                     alt={p.title}
-                    loading="lazy"
-                    className="img-scale h-[240px] w-full object-cover sm:h-[260px] md:h-[280px]"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    fetchPriority={i === 0 ? "high" : undefined}
+                    className={`img-scale w-full object-cover ${
+                      p.featured
+                        ? "h-[300px] sm:h-[420px] md:h-[520px]"
+                        : "h-[240px] sm:h-[260px] md:h-[280px]"
+                    }`}
+                    style={{ objectPosition: "center 35%" }}
                   />
                 </div>
                 <div className="mt-4 flex items-baseline justify-between">
-                  <h2 className="font-serif italic text-[14px] sm:text-[15px]">{p.title}</h2>
+                  <h2
+                    className={`font-serif italic ${
+                      p.featured ? "text-[16px] sm:text-[18px]" : "text-[14px] sm:text-[15px]"
+                    }`}
+                  >
+                    {p.title}
+                  </h2>
                   {p.size && (
                     <span className="text-[11px] ml-2 shrink-0" style={{ color: "var(--accent)" }}>
                       {p.size}

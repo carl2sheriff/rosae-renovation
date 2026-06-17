@@ -58,7 +58,7 @@ const projects = [
     type: "Aménagement & rénovation",
     size: "",
     image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505410686340-3980440ac0c8?auto=format&fit=crop&w=900&q=85",
   },
 ];
 

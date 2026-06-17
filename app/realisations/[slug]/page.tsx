@@ -8,11 +8,20 @@ import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-/* ─── Fallback gallery data for demo ────────────────────── */
+/* ─── Type helpers ─────────────────────────────────────── */
+const TYPE_LABELS: Record<string, string> = {
+  renovation_complete: "Rénovation complète",
+  renovation_partielle: "Rénovation partielle",
+  amenagement: "Aménagement",
+  restauration: "Restauration",
+};
+
+/* ─── Demo fallback ─────────────────────────────────────── */
 const DEMO_PROJECTS: Record<string, {
   title: string;
   subtitle: string;
   size: string;
+  lieu: string;
   description: string;
   images: string[];
 }> = {
@@ -20,6 +29,7 @@ const DEMO_PROJECTS: Record<string, {
     title: "Appartement — Paris 7e",
     subtitle: "Rénovation complète",
     size: "120 m²",
+    lieu: "Paris 7e",
     description:
       "Rénovation intégrale d'un appartement haussmannien — démolition des cloisons, reprise des réseaux, menuiseries sur mesure et finitions soignées. Livré en 14 semaines.",
     images: [
@@ -34,6 +44,7 @@ const DEMO_PROJECTS: Record<string, {
     title: "Maison — Neuilly-sur-Seine",
     subtitle: "Rénovation intérieure",
     size: "180 m²",
+    lieu: "Neuilly-sur-Seine",
     description:
       "Rénovation intérieure complète d'une maison de ville — cuisine ouverte, salle de bains en marbre, parquets massifs et peintures artisanales.",
     images: [
@@ -61,8 +72,31 @@ interface ProjectData {
   title: string;
   subtitle: string;
   size: string;
+  lieu: string;
   description: string;
+  narrationParagraphs: string[];
+  pointsCles: string[];
+  annee?: number;
+  duree?: string;
+  typeIntervention?: string;
+  architecte?: string;
+  photographe?: string;
   images: string[];
+}
+
+function extractTextFromLexical(doc: Record<string, unknown> | null | undefined): string[] {
+  if (!doc) return [];
+  const root = doc.root as { children?: Array<{ children?: Array<{ text?: string }>; text?: string }> } | undefined;
+  if (!root?.children) return [];
+
+  return root.children
+    .map((node) => {
+      if (node.children) {
+        return node.children.map((leaf) => leaf.text ?? "").join("");
+      }
+      return (node as { text?: string }).text ?? "";
+    })
+    .filter(Boolean);
 }
 
 async function getProject(slug: string): Promise<ProjectData | null> {
@@ -76,20 +110,39 @@ async function getProject(slug: string): Promise<ProjectData | null> {
     });
     if (!docs.length) return null;
     const r = docs[0] as unknown as Realisation;
+
     const parts = (r.subtitle ?? "").split("·").map((s) => s.trim());
-    const galleryImages = (r.gallery ?? []).map((g) =>
-      mediaUrl(g.image as Media | number)
-    ).filter(Boolean);
+    const galleryImages = (r.gallery ?? [])
+      .map((g) => mediaUrl(g.image as Media | number))
+      .filter(Boolean);
     const coverImg = mediaUrl(r.cover_image as Media | number);
     const images = [
       ...(coverImg ? [coverImg] : []),
       ...galleryImages,
     ];
+
+    const narrationParagraphs = extractTextFromLexical(
+      r.narration as Record<string, unknown> | null
+    );
+    const pointsCles = (r.points_cles ?? [])
+      .map((p) => p.texte)
+      .filter(Boolean);
+
     return {
       title: r.title,
       subtitle: parts[0] ?? "",
-      size: parts[1] ?? "",
+      size: r.surface ? `${r.surface} m²` : (parts[1] ?? ""),
+      lieu: r.lieu ?? "",
       description: "",
+      narrationParagraphs,
+      pointsCles,
+      annee: r.annee ?? undefined,
+      duree: r.duree ?? undefined,
+      typeIntervention: r.type_intervention
+        ? (TYPE_LABELS[r.type_intervention] ?? r.type_intervention)
+        : undefined,
+      architecte: r.architecte_associe ?? undefined,
+      photographe: r.photographe ?? undefined,
       images: images.length > 0 ? images : DEFAULT_IMAGES,
     };
   } catch {
@@ -103,11 +156,25 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const project = await getProject(slug);
   const demo = DEMO_PROJECTS[slug];
-  const title = demo?.title ?? "Réalisation — Rosae Rénovation";
+  const title = project?.title ?? demo?.title ?? "Réalisation — Rosae Rénovation";
+  const desc =
+    project?.narrationParagraphs[0] ??
+    demo?.description ??
+    "Découvrez cette réalisation Rosae.";
   return {
     title: `${title} — Rosae Rénovation`,
-    description: demo?.description ?? "Découvrez cette réalisation Rosae.",
+    description: desc,
+    openGraph: {
+      title: `${title} — Rosae Rénovation`,
+      description: desc,
+      images: project?.images[0]
+        ? [{ url: project.images[0] }]
+        : demo?.images[0]
+        ? [{ url: demo.images[0] }]
+        : [],
+    },
   };
 }
 
@@ -128,11 +195,23 @@ export default async function RealisationDetail({
     title: demo!.title,
     subtitle: demo!.subtitle,
     size: demo!.size,
+    lieu: demo!.lieu,
     description: demo!.description,
+    narrationParagraphs: demo!.description ? [demo!.description] : [],
+    pointsCles: [],
     images: demo!.images,
   };
 
   const [hero, ...rest] = data.images;
+
+  const infoItems = [
+    data.lieu && { label: "Lieu", value: data.lieu },
+    data.size && { label: "Surface", value: data.size },
+    data.duree && { label: "Durée", value: data.duree },
+    data.annee && { label: "Année", value: String(data.annee) },
+    data.typeIntervention && { label: "Intervention", value: data.typeIntervention },
+    data.architecte && { label: "Architecte", value: data.architecte },
+  ].filter(Boolean) as { label: string; value: string }[];
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}>
@@ -140,7 +219,7 @@ export default async function RealisationDetail({
 
       <main>
         {/* ── Hero image ──────────────────────────── */}
-        <div className="relative overflow-hidden" style={{ height: "clamp(300px, 55vh, 600px)" }}>
+        <div className="relative overflow-hidden" style={{ height: "clamp(340px, 62vh, 720px)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={hero || DEFAULT_IMAGES[0]}
@@ -151,40 +230,90 @@ export default async function RealisationDetail({
             style={{ objectPosition: "center 40%" }}
           />
           <div
-            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
             style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
           />
         </div>
 
-        {/* ── Meta ────────────────────────────────── */}
-        <section className="mx-auto max-w-6xl px-5 pt-8 pb-12 sm:px-6 md:pt-12 md:pb-16">
-          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-            <h1 className="font-serif italic" style={{ fontSize: "clamp(20px, 2.5vw, 32px)" }}>
-              {data.title}
-            </h1>
-            {data.size && (
-              <span className="text-[12px]" style={{ color: "var(--accent)" }}>
-                {data.size}
-              </span>
+        {/* ── Header + Infos ──────────────────────── */}
+        <section className="mx-auto max-w-6xl px-5 pt-8 pb-10 sm:px-6 md:pt-14 md:pb-14">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
+            {/* Title block */}
+            <div>
+              {data.subtitle && (
+                <p
+                  className="mb-3 text-[11px] uppercase tracking-[0.13em]"
+                  style={{ color: "var(--accent)" }}
+                >
+                  {data.subtitle}
+                </p>
+              )}
+              <h1 className="font-serif italic" style={{ fontSize: "clamp(22px, 3vw, 40px)", lineHeight: 1.2 }}>
+                {data.title}
+              </h1>
+            </div>
+
+            {/* Infos panel */}
+            {infoItems.length > 0 && (
+              <dl
+                className="grid gap-y-4 gap-x-8 shrink-0"
+                style={{ gridTemplateColumns: "auto 1fr", minWidth: "220px" }}
+              >
+                {infoItems.map(({ label, value }) => (
+                  <div key={label} className="contents">
+                    <dt
+                      className="text-[10px] uppercase tracking-[0.12em] pt-px"
+                      style={{ color: "var(--accent)" }}
+                    >
+                      {label}
+                    </dt>
+                    <dd className="text-[13px]" style={{ color: "var(--text-2)" }}>
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             )}
           </div>
-          {data.subtitle && (
-            <p
-              className="mt-2 text-[11px] uppercase tracking-[0.08em]"
-              style={{ color: "var(--text-2)" }}
-            >
-              {data.subtitle}
-            </p>
-          )}
-          {data.description && (
-            <p
-              className="mt-6 text-sm leading-[1.9] max-w-lg"
-              style={{ color: "var(--text-2)" }}
-            >
-              {data.description}
-            </p>
-          )}
         </section>
+
+        {/* ── Narration ───────────────────────────── */}
+        {data.narrationParagraphs.length > 0 && (
+          <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-6 md:pb-16">
+            <div
+              className="border-t pt-8 max-w-[640px]"
+              style={{ borderColor: "var(--line)" }}
+            >
+              {data.narrationParagraphs.map((p, i) => (
+                <p
+                  key={i}
+                  className="text-sm leading-[1.95] mb-5"
+                  style={{ color: "var(--text-2)" }}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Points clés ─────────────────────────── */}
+        {data.pointsCles.length > 0 && (
+          <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-6 md:pb-16">
+            <ul className="flex flex-col gap-2 max-w-lg">
+              {data.pointsCles.map((point, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--text-2)" }}>
+                  <span
+                    className="mt-[6px] h-[1px] w-4 shrink-0 inline-block"
+                    style={{ backgroundColor: "var(--accent)" }}
+                    aria-hidden="true"
+                  />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* ── Gallery ─────────────────────────────── */}
         {rest.length > 0 && (
@@ -201,7 +330,6 @@ export default async function RealisationDetail({
               </span>
             </div>
 
-            {/* Masonry-ish grid */}
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
               {rest.map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -217,6 +345,15 @@ export default async function RealisationDetail({
                 />
               ))}
             </div>
+
+            {data.photographe && (
+              <p
+                className="mt-4 text-[10px] uppercase tracking-[0.1em]"
+                style={{ color: "var(--text-2)" }}
+              >
+                Photos : {data.photographe}
+              </p>
+            )}
           </section>
         )}
 

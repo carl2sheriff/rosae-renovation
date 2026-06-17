@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 const navLinks: [string, string][] = [
-  ["Services", "/services"],
+  ["Studio", "/studio"],
+  ["Méthode", "/methode"],
   ["Réalisations", "/realisations"],
-  ["Engagements", "/#engagements"],
   ["Contact", "/contact"],
 ];
 

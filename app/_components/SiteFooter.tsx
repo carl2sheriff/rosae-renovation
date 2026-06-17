@@ -10,8 +10,11 @@ export function SiteFooter() {
           <a href="/contact" className="transition-opacity duration-300 hover:opacity-70">
             Contact
           </a>
-          <a href="#" className="transition-opacity duration-300 hover:opacity-70">
+          <a href="/mentions-legales" className="transition-opacity duration-300 hover:opacity-70">
             Mentions légales
+          </a>
+          <a href="/confidentialite" className="transition-opacity duration-300 hover:opacity-70">
+            Confidentialité
           </a>
         </div>
       </div>

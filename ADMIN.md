@@ -40,16 +40,28 @@ Bienvenue dans votre espace de gestion. Ce guide vous explique comment modifier 
 ## 3. Ajouter une réalisation
 
 1. Dans le menu de gauche, cliquez sur **Réalisations**
-2. Cliquez sur le bouton **Créer une nouvelle Réalisation** (en haut à droite)
-3. Remplissez les champs :
+2. Cliquez sur **Créer une nouvelle Réalisation** (en haut à droite)
+3. Remplissez les champs principaux :
    - **Titre** — ex : *Appartement — Paris 16e*
-   - **Sous-titre** — ex : *Rénovation complète · 95 m²*
-   - **Image principale** — uploadez la photo principale
-   - **Galerie photos** — ajoutez d'autres photos si vous le souhaitez
-   - **Identifiant URL** (colonne de droite) — ex : `appartement-paris-16e` *(sans accents, sans espaces, tirets à la place)*
-   - **Ordre d'affichage** — chiffre pour choisir la position (1 = premier)
-   - **Publié** — cochez pour que le projet soit visible sur le site
-4. Cliquez sur **Sauvegarder les modifications**
+   - **Sous-titre** — ex : *Rénovation complète · 95 m²* (optionnel)
+   - **Image principale** — uploadez la photo de couverture
+   - **Galerie photos** — ajoutez les photos supplémentaires
+4. Champs détaillés (nouveaux) :
+   - **Lieu** — ex : *Paris 7e* ou *Neuilly-sur-Seine*
+   - **Surface (m²)** — ex : `120`
+   - **Durée des travaux** — ex : *14 semaines*
+   - **Année de livraison** — ex : `2024`
+   - **Type d'intervention** — choisissez dans la liste
+   - **Architecte associé** — si vous avez travaillé avec un architecte
+   - **Crédit photographe** — nom du photographe si applicable
+   - **Description narrative** — texte détaillé du projet (éditeur de texte riche)
+   - **Points clés** — liste à puces courte (ex : *Parquets massifs en chêne fumé*)
+5. Colonne de droite :
+   - **Identifiant URL** — ex : `appartement-paris-16e` *(sans accents, sans espaces)*
+   - **Ordre d'affichage** — 1 = premier dans la liste
+   - **Publié** — cochez pour rendre visible
+   - **Mis en avant** — cochez pour mettre en valeur dans la grille
+6. Cliquez sur **Sauvegarder les modifications**
 
 > Le site se met à jour automatiquement dans la minute suivant la sauvegarde.
 
@@ -64,7 +76,46 @@ Bienvenue dans votre espace de gestion. Ce guide vous explique comment modifier 
    - **Numéro de téléphone** — ex : *+33 1 23 45 67 89*
    - **Adresse email** — ex : *rosaerenovation@gmail.com*
    - **Adresse** (optionnel)
+   - **Lien Cal.com** — voir section suivante
 3. Cliquez sur **Sauvegarder les modifications**
+
+---
+
+## 4b. Activer la prise de rendez-vous en ligne (Cal.com)
+
+Le site supporte Cal.com pour permettre aux prospects de réserver un créneau directement depuis la page Contact.
+
+### Étape 1 — Créer votre compte Cal.com
+
+1. Allez sur [cal.com](https://cal.com) et créez un compte avec votre email professionnel
+2. Créez un "Event Type" nommé **Devis 30 min** (ou similaire)
+3. Configurez vos disponibilités
+4. Notez l'URL de votre lien de réservation — elle ressemble à : `cal.com/rosae-renovation/devis`
+
+### Étape 2 — Connecter Cal.com au site
+
+1. Dans l'admin Payload, section **Paramètres**, cliquez sur **Contact**
+2. Dans le champ **Lien Cal.com**, saisissez uniquement la partie après `cal.com/`
+   - Exemple : si votre lien est `cal.com/rosae-renovation/devis`, saisissez `rosae-renovation/devis`
+3. Cliquez sur **Sauvegarder les modifications**
+4. Visitez `/contact` sur le site — le bouton "Choisir un créneau →" apparaît et ouvre Cal.com en popup
+
+### Si Cal.com n'est pas configuré
+
+Si le champ **Lien Cal.com** est vide, la page Contact affiche deux boutons alternatifs (Appeler et Écrire) à la place du calendrier. Le site reste toujours fonctionnel.
+
+---
+
+## 4c. Modifier la citation du fondateur (page d'accueil)
+
+1. Dans le menu de gauche, section **Paramètres**, cliquez sur **Page d'accueil**
+2. Les champs disponibles :
+   - **Citation fondateur (texte)** — la citation de Stéphane Beilin
+   - **Nom de l'auteur** — par défaut *Stéphane Beilin*
+   - **Titre de l'auteur** — par défaut *Fondateur · Rosae*
+3. Cliquez sur **Sauvegarder les modifications**
+
+> Si le champ citation est vide, le texte par défaut intégré dans le site s'affiche automatiquement.
 
 ---
 
@@ -126,7 +177,9 @@ N'hésitez pas à contacter Carl pour :
 |--------|----------------------|
 | Modifier la grande photo d'accueil | Paramètres → Page d'accueil |
 | Modifier le texte d'intro | Paramètres → Page d'accueil |
+| Modifier la citation Stéphane Beilin | Paramètres → Page d'accueil |
 | Modifier les coordonnées | Paramètres → Contact |
+| Activer Cal.com (prise de RDV) | Paramètres → Contact → Lien Cal.com |
 | Ajouter / modifier un projet | Contenu → Réalisations |
 | Modifier un service | Contenu → Services |
 | Modifier un engagement | Contenu → Engagements |

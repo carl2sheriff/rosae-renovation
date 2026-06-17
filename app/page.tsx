@@ -15,7 +15,7 @@ const FALLBACK: HomePageProps = {
       subtitle: "Rénovation complète",
       size: "120 m²",
       imageUrl:
-        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85",
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
     },
     {
       slug: "maison-neuilly",
@@ -23,15 +23,15 @@ const FALLBACK: HomePageProps = {
       subtitle: "Rénovation intérieure",
       size: "180 m²",
       imageUrl:
-        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&w=900&q=85",
     },
     {
-      slug: "bureaux-paris-8",
-      title: "Bureaux — Paris 8e",
-      subtitle: "Aménagement & rénovation",
-      size: "",
+      slug: "appartement-paris-16",
+      title: "Appartement — Paris 16e",
+      subtitle: "Rénovation partielle",
+      size: "75 m²",
       imageUrl:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85",
     },
   ],
   services: [

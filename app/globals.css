@@ -70,3 +70,8 @@ body {
 .group:hover .img-scale {
   transform: scale(1.025);
 }
+
+/* ─── Back link hover (server components can't use onMouse*) */
+.back-link:hover {
+  color: var(--text-1) !important;
+}

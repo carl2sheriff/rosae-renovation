@@ -10,25 +10,28 @@ export const dynamic = 'force-dynamic';
 const FALLBACK: HomePageProps = {
   projects: [
     {
+      slug: "appartement-paris-7",
       title: "Appartement — Paris 7e",
       subtitle: "Rénovation complète",
       size: "120 m²",
       imageUrl:
-        "https://images.unsplash.com/photo-1505410603994-c3ac6269711f?auto=format&fit=crop&w=1400&q=85",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85",
     },
     {
+      slug: "maison-neuilly",
       title: "Maison — Neuilly-sur-Seine",
       subtitle: "Rénovation intérieure",
       size: "180 m²",
       imageUrl:
-        "https://images.unsplash.com/photo-1505409628601-edc9af17fda6?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
     },
     {
+      slug: "bureaux-paris-8",
       title: "Bureaux — Paris 8e",
       subtitle: "Aménagement & rénovation",
       size: "",
       imageUrl:
-        "https://images.unsplash.com/photo-1505410686340-3980440ac0c8?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
     },
   ],
   services: [
@@ -104,6 +107,7 @@ async function fetchData(): Promise<HomePageProps | null> {
     const projects: ProjectCard[] = (realisations.docs as unknown as Realisation[]).map((r) => {
       const subtitleParts = (r.subtitle ?? "").split("·").map((s) => s.trim());
       return {
+        slug: r.slug ?? "",
         title: r.title,
         subtitle: subtitleParts[0] ?? "",
         size: subtitleParts[1] ?? "",

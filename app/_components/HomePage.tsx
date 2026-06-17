@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import type { Realisation, Service, Engagement, Contact, Media } from "@/payload-types";
+import { useEffect, useRef, type ReactNode } from "react";
+import { SiteNav } from "./SiteNav";
+import { SiteFooter } from "./SiteFooter";
 
-/* ─── Scroll fade-in wrapper ─────────────────────────────── */
+/* ─── Scroll fade-in ──────────────────────────────────────── */
 function FadeIn({
   children,
   className = "",
@@ -38,8 +39,9 @@ function FadeIn({
   );
 }
 
-/* ─── Types ──────────────────────────────────────────────── */
+/* ─── Types ───────────────────────────────────────────────── */
 export interface ProjectCard {
+  slug: string;
   title: string;
   subtitle: string;
   size: string;
@@ -72,125 +74,29 @@ export interface HomePageProps {
   heroImageUrl?: string;
 }
 
-/* ─── Nav ────────────────────────────────────────────────── */
-const navItems: [string, string][] = [
-  ["Services", "#services"],
-  ["Réalisations", "#realisations"],
-  ["Engagements", "#engagements"],
-  ["Contact", "#contact"],
-];
-
-/* ─── Page client component ──────────────────────────────── */
-export function HomePage({ projects, services, engagements, contact, heroImageUrl }: HomePageProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+/* ─── Page component ──────────────────────────────────────── */
+export function HomePage({
+  projects,
+  services,
+  engagements,
+  contact,
+  heroImageUrl,
+}: HomePageProps) {
   return (
     <div
       className="min-h-screen"
       style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}
     >
-      {/* ══════════════════════════════════════════
-          HEADER
-      ══════════════════════════════════════════ */}
-      <header
-        className="sticky top-0 z-50"
-        style={{
-          borderBottom: "1px solid var(--line)",
-          background: "color-mix(in srgb, var(--bg) 88%, transparent)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-        }}
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-[18px]">
-          <a
-            href="#"
-            className="font-serif italic tracking-[0.05em] text-[15px]"
-            style={{ color: "var(--text-1)" }}
-            onClick={() => setMenuOpen(false)}
-          >
-            ROSAE
-          </a>
-
-          <nav className="hidden gap-10 md:flex">
-            {navItems.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                className="text-[11px] uppercase tracking-[0.13em] transition-colors duration-300"
-                style={{ color: "var(--text-2)" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--text-1)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--text-2)")
-                }
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col justify-center gap-[5px] w-6 h-6"
-            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((o) => !o)}
-          >
-            <span
-              className="block h-px w-full transition-all duration-300 origin-center"
-              style={{
-                backgroundColor: "var(--text-1)",
-                transform: menuOpen ? "translateY(5px) rotate(45deg)" : "none",
-              }}
-            />
-            <span
-              className="block h-px w-full transition-all duration-300"
-              style={{
-                backgroundColor: "var(--text-1)",
-                opacity: menuOpen ? 0 : 1,
-              }}
-            />
-            <span
-              className="block h-px w-full transition-all duration-300 origin-center"
-              style={{
-                backgroundColor: "var(--text-1)",
-                transform: menuOpen ? "translateY(-5px) rotate(-45deg)" : "none",
-              }}
-            />
-          </button>
-        </div>
-
-        {/* Mobile nav overlay */}
-        {menuOpen && (
-          <div
-            className="md:hidden border-t"
-            style={{
-              borderColor: "var(--line)",
-              background: "color-mix(in srgb, var(--bg) 97%, transparent)",
-            }}
-          >
-            <nav className="mx-auto max-w-6xl flex flex-col px-6 py-6 gap-6">
-              {navItems.map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-[13px] uppercase tracking-[0.13em]"
-                  style={{ color: "var(--text-1)" }}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        )}
-      </header>
+      <SiteNav activePath="/" />
 
       {/* ══════════════════════════════════════════
           HERO
       ══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ height: "88vh" }}>
+      <section
+        className="relative overflow-hidden"
+        style={{ height: "clamp(320px, 88vh, 900px)" }}
+        aria-label="Image de présentation"
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={
@@ -227,7 +133,10 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
               className="pr-10 text-[11px] uppercase tracking-[0.18em] whitespace-nowrap"
               style={{ color: "var(--accent)" }}
             >
-              Rosae &nbsp;·&nbsp; Rénovation d&apos;intérieurs &nbsp;·&nbsp; Paris &nbsp;·&nbsp; Île-de-France &nbsp;·&nbsp; Appartements &nbsp;·&nbsp; Maisons &nbsp;·&nbsp; Bureaux &nbsp;·&nbsp; Espaces hôteliers &nbsp;·&nbsp;
+              Rosae &nbsp;·&nbsp; Rénovation d&apos;intérieurs &nbsp;·&nbsp;
+              Paris &nbsp;·&nbsp; Île-de-France &nbsp;·&nbsp; Appartements
+              &nbsp;·&nbsp; Maisons &nbsp;·&nbsp; Bureaux &nbsp;·&nbsp; Espaces
+              hôteliers &nbsp;·&nbsp;
             </span>
           ))}
         </div>
@@ -236,13 +145,16 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
       {/* ══════════════════════════════════════════
           INTRO
       ══════════════════════════════════════════ */}
-      <section id="accueil" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <section
+        id="accueil"
+        className="mx-auto max-w-6xl px-5 py-16 sm:px-6 md:py-28"
+      >
         <FadeIn>
           <p
-            className="font-serif max-w-[700px]"
+            className="font-serif max-w-[680px]"
             style={{
-              fontSize: "clamp(19px, 1.8vw, 24px)",
-              lineHeight: 1.8,
+              fontSize: "clamp(17px, 1.8vw, 23px)",
+              lineHeight: 1.85,
               color: "var(--text-1)",
             }}
           >
@@ -255,9 +167,9 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
           </p>
         </FadeIn>
 
-        <FadeIn delay={160} className="mt-12 md:mt-14">
+        <FadeIn delay={160} className="mt-10 md:mt-14">
           <div
-            className="max-w-[580px] border-l pl-6"
+            className="max-w-[540px] border-l pl-6"
             style={{ borderColor: "var(--accent)" }}
           >
             <p
@@ -278,11 +190,11 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
       ══════════════════════════════════════════ */}
       <section
         id="realisations"
-        className="mx-auto max-w-6xl px-6 pb-24 md:pb-32"
+        className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 md:pb-28"
       >
         <FadeIn>
           <div
-            className="mb-10 flex items-baseline justify-between border-t pt-8"
+            className="mb-8 flex items-baseline justify-between border-t pt-8"
             style={{ borderColor: "var(--line)" }}
           >
             <span
@@ -292,9 +204,15 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
               Réalisations
             </span>
             <a
-              href="#"
+              href="/realisations"
               className="text-[11px] transition-colors duration-300"
               style={{ color: "var(--text-2)", letterSpacing: "0.05em" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--text-1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--text-2)")
+              }
             >
               Voir tout →
             </a>
@@ -302,83 +220,153 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
         </FadeIn>
 
         {projects.length > 0 && (
-          <div className="grid gap-3 md:grid-cols-[1.45fr_1fr]">
-            {/* Featured large */}
-            <FadeIn delay={80}>
-              <article className="group cursor-pointer">
-                <div className="overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={projects[0].imageUrl}
-                    alt={projects[0].title}
-                    loading="lazy"
-                    className="img-scale h-[58vh] w-full object-cover"
-                  />
-                </div>
-                <div className="mt-4 flex items-baseline justify-between">
-                  <h3 className="font-serif italic text-[15px]">
-                    {projects[0].title}
-                  </h3>
-                  {projects[0].size && (
-                    <span className="text-[11px]" style={{ color: "var(--accent)" }}>
-                      {projects[0].size}
-                    </span>
-                  )}
-                </div>
-                <p
-                  className="mt-1 text-[11px] uppercase tracking-[0.08em]"
-                  style={{ color: "var(--text-2)" }}
-                >
-                  {projects[0].subtitle}
-                </p>
-              </article>
-            </FadeIn>
-
-            {/* Stacked right */}
-            {projects.length > 1 && (
-              <div className="flex flex-col gap-3">
-                {projects.slice(1, 3).map((p, i) => (
-                  <FadeIn key={p.title} delay={180 + i * 90}>
-                    <article className="group cursor-pointer">
-                      <div className="overflow-hidden">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={p.imageUrl}
-                          alt={p.title}
-                          loading="lazy"
-                          className="img-scale h-[27.5vh] w-full object-cover"
-                        />
-                      </div>
-                      <div className="mt-3 flex items-baseline justify-between">
-                        <h3 className="font-serif italic text-[13px]">{p.title}</h3>
-                        {p.size && (
-                          <span className="text-[11px]" style={{ color: "var(--accent)" }}>
-                            {p.size}
-                          </span>
-                        )}
-                      </div>
+          <>
+            {/* Mobile: single column */}
+            <div className="flex flex-col gap-5 md:hidden">
+              {projects.slice(0, 3).map((p, i) => (
+                <FadeIn key={p.slug || p.title} delay={i * 80}>
+                  <a
+                    href={`/realisations/${p.slug}`}
+                    className="group block"
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    <div className="overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={p.imageUrl}
+                        alt={p.title}
+                        loading={i === 0 ? "eager" : "lazy"}
+                        className="img-scale h-[240px] w-full object-cover"
+                      />
+                    </div>
+                    <div className="mt-3 flex items-baseline justify-between">
+                      <h3 className="font-serif italic text-[14px]">
+                        {p.title}
+                      </h3>
+                      {p.size && (
+                        <span
+                          className="text-[11px] ml-2 shrink-0"
+                          style={{ color: "var(--accent)" }}
+                        >
+                          {p.size}
+                        </span>
+                      )}
+                    </div>
+                    {p.subtitle && (
                       <p
                         className="mt-1 text-[11px] uppercase tracking-[0.08em]"
                         style={{ color: "var(--text-2)" }}
                       >
                         {p.subtitle}
                       </p>
-                    </article>
-                  </FadeIn>
-                ))}
-              </div>
-            )}
-          </div>
+                    )}
+                  </a>
+                </FadeIn>
+              ))}
+            </div>
+
+            {/* Desktop: editorial grid */}
+            <div className="hidden md:grid gap-3 md:grid-cols-[1.45fr_1fr]">
+              {/* Featured */}
+              <FadeIn delay={80}>
+                <a
+                  href={`/realisations/${projects[0].slug}`}
+                  className="group block"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <div className="overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={projects[0].imageUrl}
+                      alt={projects[0].title}
+                      loading="lazy"
+                      className="img-scale h-[58vh] w-full object-cover"
+                    />
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between">
+                    <h3 className="font-serif italic text-[15px]">
+                      {projects[0].title}
+                    </h3>
+                    {projects[0].size && (
+                      <span
+                        className="text-[11px]"
+                        style={{ color: "var(--accent)" }}
+                      >
+                        {projects[0].size}
+                      </span>
+                    )}
+                  </div>
+                  {projects[0].subtitle && (
+                    <p
+                      className="mt-1 text-[11px] uppercase tracking-[0.08em]"
+                      style={{ color: "var(--text-2)" }}
+                    >
+                      {projects[0].subtitle}
+                    </p>
+                  )}
+                </a>
+              </FadeIn>
+
+              {/* Stacked right */}
+              {projects.length > 1 && (
+                <div className="flex flex-col gap-3">
+                  {projects.slice(1, 3).map((p, i) => (
+                    <FadeIn key={p.slug || p.title} delay={180 + i * 90}>
+                      <a
+                        href={`/realisations/${p.slug}`}
+                        className="group block"
+                        style={{ color: "inherit", textDecoration: "none" }}
+                      >
+                        <div className="overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={p.imageUrl}
+                            alt={p.title}
+                            loading="lazy"
+                            className="img-scale h-[27.5vh] w-full object-cover"
+                          />
+                        </div>
+                        <div className="mt-3 flex items-baseline justify-between">
+                          <h3 className="font-serif italic text-[13px]">
+                            {p.title}
+                          </h3>
+                          {p.size && (
+                            <span
+                              className="text-[11px]"
+                              style={{ color: "var(--accent)" }}
+                            >
+                              {p.size}
+                            </span>
+                          )}
+                        </div>
+                        {p.subtitle && (
+                          <p
+                            className="mt-1 text-[11px] uppercase tracking-[0.08em]"
+                            style={{ color: "var(--text-2)" }}
+                          >
+                            {p.subtitle}
+                          </p>
+                        )}
+                      </a>
+                    </FadeIn>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
         )}
       </section>
 
       {/* ══════════════════════════════════════════
           SERVICES
       ══════════════════════════════════════════ */}
-      <section id="services" className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+      <section
+        id="services"
+        className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 md:pb-28"
+      >
         <FadeIn>
           <div
-            className="mb-12 border-t pt-8"
+            className="mb-8 flex items-baseline justify-between border-t pt-8"
             style={{ borderColor: "var(--line)" }}
           >
             <span
@@ -387,6 +375,19 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
             >
               Services
             </span>
+            <a
+              href="/services"
+              className="text-[11px] transition-colors duration-300"
+              style={{ color: "var(--text-2)", letterSpacing: "0.05em" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--text-1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--text-2)")
+              }
+            >
+              En savoir plus →
+            </a>
           </div>
         </FadeIn>
 
@@ -394,14 +395,22 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
           {services.map((s, i) => (
             <FadeIn key={s.num + s.title} delay={i * 90}>
               <div
-                className="grid py-8 md:grid-cols-[72px_1fr_2fr] md:gap-8"
+                className="grid gap-3 py-7 md:grid-cols-[72px_1fr_2fr] md:gap-8 md:py-8"
                 style={{ borderBottom: "1px solid var(--line)" }}
               >
-                <span className="mb-3 text-[11px] md:mb-0" style={{ color: "var(--accent)" }}>
+                <span
+                  className="text-[11px]"
+                  style={{ color: "var(--accent)" }}
+                >
                   {s.num}
                 </span>
-                <h3 className="font-serif italic text-[17px] mb-3 md:mb-0">{s.title}</h3>
-                <p className="text-sm leading-[1.9]" style={{ color: "var(--text-2)" }}>
+                <h3 className="font-serif italic text-[16px] sm:text-[17px]">
+                  {s.title}
+                </h3>
+                <p
+                  className="text-sm leading-[1.9]"
+                  style={{ color: "var(--text-2)" }}
+                >
                   {s.desc}
                 </p>
               </div>
@@ -415,11 +424,11 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
       ══════════════════════════════════════════ */}
       <section
         id="engagements"
-        className="mx-auto max-w-6xl px-6 pb-24 md:pb-32"
+        className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 md:pb-28"
       >
         <FadeIn>
           <div
-            className="mb-12 border-t pt-8"
+            className="mb-8 border-t pt-8"
             style={{ borderColor: "var(--line)" }}
           >
             <span
@@ -431,12 +440,20 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
           </div>
         </FadeIn>
 
-        <div className="grid gap-x-16 gap-y-10 md:grid-cols-2">
+        <div className="grid gap-x-12 gap-y-8 sm:grid-cols-2 md:gap-x-16 md:gap-y-10">
           {engagements.map((e, i) => (
             <FadeIn key={e.title} delay={i * 70}>
-              <div className="border-t pt-6" style={{ borderColor: "var(--line)" }}>
-                <h3 className="font-serif italic text-[17px]">{e.title}</h3>
-                <p className="mt-3 text-sm leading-[1.9]" style={{ color: "var(--text-2)" }}>
+              <div
+                className="border-t pt-6"
+                style={{ borderColor: "var(--line)" }}
+              >
+                <h3 className="font-serif italic text-[16px] sm:text-[17px]">
+                  {e.title}
+                </h3>
+                <p
+                  className="mt-3 text-sm leading-[1.9]"
+                  style={{ color: "var(--text-2)" }}
+                >
                   {e.desc}
                 </p>
               </div>
@@ -448,35 +465,45 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
       {/* ══════════════════════════════════════════
           CONTACT
       ══════════════════════════════════════════ */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 pb-32 md:pb-44">
+      <section
+        id="contact"
+        className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-40"
+      >
         <FadeIn>
           <div
-            className="border-t pt-16 md:pt-20"
+            className="border-t pt-14 md:pt-20"
             style={{ borderColor: "var(--line)" }}
           >
-            <div className="grid gap-12 md:grid-cols-2">
+            <div className="grid gap-10 md:grid-cols-2 md:gap-16">
               <div>
                 <h2
                   className="font-serif italic"
                   style={{
-                    fontSize: "clamp(28px, 3.5vw, 46px)",
+                    fontSize: "clamp(26px, 3.5vw, 44px)",
                     lineHeight: 1.2,
                     color: "var(--text-1)",
                   }}
                 >
-                  {contact.ctaTitle.split(".")[0]}.<br />
-                  {contact.ctaTitle.includes("\n")
-                    ? contact.ctaTitle.split("\n")[1]
-                    : ""}
+                  {contact.ctaTitle}
                 </h2>
                 {contact.ctaSubtitle && (
                   <p
-                    className="mt-6 text-sm leading-[1.9] max-w-xs"
+                    className="mt-5 text-sm leading-[1.9] max-w-sm"
                     style={{ color: "var(--text-2)" }}
                   >
                     {contact.ctaSubtitle}
                   </p>
                 )}
+                <a
+                  href="/contact"
+                  className="mt-8 inline-block text-[11px] uppercase tracking-[0.18em] border px-6 py-3 transition-all duration-300 hover:bg-[var(--text-1)] hover:text-[var(--bg)]"
+                  style={{
+                    borderColor: "var(--text-1)",
+                    color: "var(--text-1)",
+                  }}
+                >
+                  Prendre rendez-vous
+                </a>
               </div>
 
               <div className="flex flex-col gap-3 text-sm md:justify-end md:items-end">
@@ -485,8 +512,12 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
                     href={`tel:${contact.phone.replace(/\s/g, "")}`}
                     className="transition-colors duration-300"
                     style={{ color: "var(--text-1)" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "var(--accent)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--text-1)")
+                    }
                   >
                     {contact.phone}
                   </a>
@@ -496,8 +527,12 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
                     href={`mailto:${contact.email}`}
                     className="transition-colors duration-300"
                     style={{ color: "var(--text-1)" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "var(--accent)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--text-1)")
+                    }
                   >
                     {contact.email}
                   </a>
@@ -508,22 +543,7 @@ export function HomePage({ projects, services, engagements, contact, heroImageUr
         </FadeIn>
       </section>
 
-      {/* ══════════════════════════════════════════
-          FOOTER
-      ══════════════════════════════════════════ */}
-      <footer style={{ borderTop: "1px solid var(--line)" }}>
-        <div
-          className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-[11px]"
-          style={{ color: "var(--accent)" }}
-        >
-          <span>Rosae — Entreprise générale du bâtiment, Paris</span>
-          <div className="flex gap-6">
-            <a href="#" className="transition-colors duration-300 hover:opacity-70">
-              Mentions légales
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

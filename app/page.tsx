@@ -238,6 +238,27 @@ export default function RosaePage() {
       </section>
 
       {/* ══════════════════════════════════════════
+          MARQUEE BAND
+      ══════════════════════════════════════════ */}
+      <div
+        className="overflow-hidden py-4 border-y"
+        style={{ borderColor: "var(--line)" }}
+        aria-hidden="true"
+      >
+        <div className="marquee-track">
+          {[0, 1].map((n) => (
+            <span
+              key={n}
+              className="pr-10 text-[11px] uppercase tracking-[0.18em] whitespace-nowrap"
+              style={{ color: "var(--accent)" }}
+            >
+              Rosae &nbsp;·&nbsp; Rénovation d&apos;intérieurs &nbsp;·&nbsp; Paris &nbsp;·&nbsp; Île-de-France &nbsp;·&nbsp; Appartements &nbsp;·&nbsp; Maisons &nbsp;·&nbsp; Bureaux &nbsp;·&nbsp; Espaces hôteliers &nbsp;·&nbsp;
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
           INTRO
       ══════════════════════════════════════════ */}
       <section id="accueil" className="mx-auto max-w-6xl px-6 py-24 md:py-32">

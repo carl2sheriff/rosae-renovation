@@ -44,6 +44,25 @@ body {
   transform: translateY(0);
 }
 
+/* ─── Marquee ────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .fade-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ─── Image hover scale ──────────────────────────────────── */
 .img-scale {
   transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);

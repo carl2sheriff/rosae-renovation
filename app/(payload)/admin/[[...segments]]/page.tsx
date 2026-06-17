@@ -16,6 +16,6 @@ export async function generateMetadata({ params, searchParams }: Args): Promise<
   return generatePageMetadata({ config: configPromise, params, searchParams })
 }
 
-export default function Page({ params, searchParams }: Args) {
+export default async function Page({ params, searchParams }: Args) {
   return RootPage({ config: configPromise, importMap, params, searchParams })
 }

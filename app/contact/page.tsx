@@ -187,6 +187,82 @@ export default async function ContactPage() {
           </div>
         </section>
 
+        {/* ── FAQ ──────────────────────────────────── */}
+        <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-6 md:pb-28">
+          <div
+            className="border-t pt-12"
+            style={{ borderColor: "var(--line)" }}
+          >
+            <p
+              className="text-[11px] uppercase tracking-[0.13em] mb-4"
+              style={{ color: "var(--accent)" }}
+            >
+              Questions fréquentes
+            </p>
+            <h2
+              className="font-serif italic mb-10"
+              style={{ fontSize: "clamp(18px, 2.2vw, 26px)", lineHeight: 1.25 }}
+            >
+              Ce que vous voulez savoir
+            </h2>
+
+            <div className="max-w-2xl faq-list">
+              {[
+                {
+                  q: "Comment se déroule la première visite ?",
+                  a: "Nous venons sur site pour évaluer l'état du logement, comprendre votre projet et prendre les mesures nécessaires. C'est un échange sans engagement, d'environ une heure, à l'issue duquel nous définissons ensemble le périmètre de l'intervention.",
+                },
+                {
+                  q: "Quel est le délai pour recevoir un devis ?",
+                  a: "Sous une semaine après la visite. Notre devis est détaillé poste par poste — gros œuvre, second œuvre, finitions — pour que vous compreniez précisément à quoi correspond chaque ligne.",
+                },
+                {
+                  q: "Intervenez-vous uniquement à Paris ?",
+                  a: "Nous intervenons principalement à Paris et en première couronne (Neuilly, Boulogne, Vincennes, Saint-Cloud…). Pour des projets d'envergure, nous nous déplaçons en Île-de-France sans frais supplémentaires.",
+                },
+                {
+                  q: "Travaillez-vous avec des architectes ?",
+                  a: "Oui. Nous collaborons régulièrement avec des architectes d'intérieur et des maîtres d'œuvre. Nous intervenons aussi bien en entreprise générale autonome que comme prestataire technique dans leur équipe.",
+                },
+                {
+                  q: "Quels sont vos délais d'intervention ?",
+                  a: "Entre la signature du devis et le début des travaux, il faut généralement compter 4 à 8 semaines selon la disponibilité de nos équipes et la complexité du projet. Nous planifions toujours un rétroplanning précis en début de chantier.",
+                },
+                {
+                  q: "Comment gérez-vous les imprévus de chantier ?",
+                  a: "Chaque chantier de rénovation réserve des surprises. Nous les documentons systématiquement, proposons des solutions et chiffrons toute modification avant d'agir — jamais de travaux supplémentaires sans votre accord écrit.",
+                },
+              ].map(({ q, a }) => (
+                <details
+                  key={q}
+                  className="group border-b"
+                  style={{ borderColor: "var(--line)" }}
+                >
+                  <summary
+                    className="flex cursor-pointer items-center justify-between gap-4 py-5 text-sm font-medium select-none list-none"
+                    style={{ color: "var(--text-1)" }}
+                  >
+                    <span>{q}</span>
+                    <span
+                      className="shrink-0 transition-transform duration-300 group-open:rotate-45"
+                      style={{ color: "var(--accent)", fontSize: "20px", lineHeight: 1 }}
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p
+                    className="pb-5 pr-8 text-sm leading-[1.9]"
+                    style={{ color: "var(--text-2)" }}
+                  >
+                    {a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Formulaire de contact ─────────────── */}
         <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">
           <div

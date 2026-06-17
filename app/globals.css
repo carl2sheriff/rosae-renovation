@@ -101,3 +101,8 @@ body {
   outline-offset: 3px;
   border-radius: 1px;
 }
+
+/* ─── FAQ accordion ──────────────────────────────────────── */
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::marker { display: none; }
+details[open] > summary .faq-plus { transform: rotate(45deg); }

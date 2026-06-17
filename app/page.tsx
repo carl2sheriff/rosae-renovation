@@ -4,7 +4,7 @@ import { HomePage } from "./_components/HomePage";
 import type { HomePageProps, ProjectCard, ServiceCard, EngagementCard } from "./_components/HomePage";
 import type { Media, Realisation } from "@/payload-types";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 /* ─── Static fallbacks (used when DB unavailable) ───────── */
 const FALLBACK: HomePageProps = {

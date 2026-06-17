@@ -171,8 +171,18 @@ export default function RosaePage() {
           src="https://images.unsplash.com/photo-1644589104114-41ea93fc02e7?auto=format&fit=crop&w=1800&q=85"
           alt=""
           aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
           className="h-full w-full object-cover"
           style={{ objectPosition: "center 40%" }}
+        />
+        {/* Gradient blend from image into background */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, var(--bg))",
+          }}
         />
       </section>
 
@@ -254,6 +264,7 @@ export default function RosaePage() {
                 <img
                   src={projects[0].image}
                   alt={projects[0].title}
+                  loading="lazy"
                   className="img-scale h-[58vh] w-full object-cover"
                 />
               </div>
@@ -287,6 +298,7 @@ export default function RosaePage() {
                     <img
                       src={p.image}
                       alt={p.title}
+                      loading="lazy"
                       className="img-scale h-[27.5vh] w-full object-cover"
                     />
                   </div>

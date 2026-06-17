@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
+/* ─── Design tokens ───────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:      #F2EFE9;   /* ivoire pierre tiède */
+  --surface: #EAE6DE;   /* légèrement plus sombre pour cartes */
+  --text-1:  #1B1916;   /* charbon chaud — jamais noir pur */
+  --text-2:  #68625A;   /* gris-brun secondaire */
+  --accent:  #8A7963;   /* bronze / sable */
+  --line:    #D3CEC4;   /* séparateur chaud */
 }
 
+/* ─── Tailwind font theme ────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-eb-garamond), 'Georgia', serif;
+  --font-sans:  var(--font-inter), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ──────────────────────────────────────────────── */
+html {
+  background-color: var(--bg);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+/* ─── Scroll fade-in ─────────────────────────────────────── */
+.fade-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity  780ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 780ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.fade-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Image hover scale ──────────────────────────────────── */
+.img-scale {
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .img-scale {
+  transform: scale(1.025);
 }

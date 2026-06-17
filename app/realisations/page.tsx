@@ -1,5 +1,6 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import type { Where } from "payload";
 import { SiteNav } from "@/app/_components/SiteNav";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import type { Media, Realisation } from "@/payload-types";
@@ -75,12 +76,23 @@ function mediaUrl(m: number | Media | null | undefined): string {
   return m.sizes?.card?.url ?? m.url ?? "";
 }
 
-async function getProjects() {
+const TYPE_FILTERS = [
+  { value: "renovation_complete", label: "Rénovation complète" },
+  { value: "renovation_partielle", label: "Rénovation partielle" },
+  { value: "amenagement", label: "Aménagement" },
+  { value: "restauration", label: "Restauration" },
+] as const;
+
+async function getProjects(typeFilter?: string) {
   try {
     const payload = await getPayload({ config: configPromise });
+    const where: Where = { published: { equals: true } };
+    if (typeFilter) {
+      where.type_intervention = { equals: typeFilter };
+    }
     const { docs } = await payload.find({
       collection: "realisations",
-      where: { published: { equals: true } },
+      where,
       sort: "order",
       limit: 50,
       depth: 1,
@@ -94,6 +106,7 @@ async function getProjects() {
         size: parts[1] ?? "",
         imageUrl: mediaUrl(r.cover_image as Media | number),
         featured: r.featured ?? false,
+        typeIntervention: r.type_intervention ?? "",
       };
     });
   } catch {
@@ -101,9 +114,14 @@ async function getProjects() {
   }
 }
 
-export default async function RealisationsPage() {
-  const projects = await getProjects();
-  const list = projects.length > 0 ? projects : FALLBACK_PROJECTS;
+export default async function RealisationsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string }>;
+}) {
+  const { type: typeFilter } = await searchParams;
+  const projects = await getProjects(typeFilter);
+  const list = projects.length > 0 ? projects : (typeFilter ? [] : FALLBACK_PROJECTS);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}>
@@ -128,8 +146,46 @@ export default async function RealisationsPage() {
           </div>
         </section>
 
+        {/* ── Filters ─────────────────────────────── */}
+        <section className="mx-auto max-w-6xl px-5 pb-8 sm:px-6">
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="/realisations"
+              className="text-[10px] uppercase tracking-[0.13em] border px-4 py-2 transition-all duration-300"
+              style={{
+                borderColor: !typeFilter ? "var(--text-1)" : "var(--line)",
+                color: !typeFilter ? "var(--text-1)" : "var(--text-2)",
+                background: !typeFilter ? "transparent" : "transparent",
+              }}
+            >
+              Tous
+            </a>
+            {TYPE_FILTERS.map(({ value, label }) => {
+              const active = typeFilter === value;
+              return (
+                <a
+                  key={value}
+                  href={`/realisations?type=${value}`}
+                  className="text-[10px] uppercase tracking-[0.13em] border px-4 py-2 transition-all duration-300"
+                  style={{
+                    borderColor: active ? "var(--text-1)" : "var(--line)",
+                    color: active ? "var(--text-1)" : "var(--text-2)",
+                  }}
+                >
+                  {label}
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
         {/* ── Grid ────────────────────────────────── */}
         <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">
+          {list.length === 0 && (
+            <p className="py-16 text-sm" style={{ color: "var(--text-2)" }}>
+              Aucune réalisation dans cette catégorie pour le moment.
+            </p>
+          )}
           <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
             {list.map((p, i) => (
               <a

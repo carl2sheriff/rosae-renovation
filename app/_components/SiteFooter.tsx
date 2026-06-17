@@ -10,6 +10,9 @@ export function SiteFooter() {
           <a href="/contact" className="transition-opacity duration-300 hover:opacity-70">
             Contact
           </a>
+          <a href="/architectes" className="transition-opacity duration-300 hover:opacity-70">
+            Architectes
+          </a>
           <a href="/partenaires" className="transition-opacity duration-300 hover:opacity-70">
             Partenaires
           </a>

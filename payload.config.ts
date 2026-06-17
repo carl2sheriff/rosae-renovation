@@ -355,6 +355,174 @@ export default buildConfig({
       ],
     },
 
+    /* Architectes partenaires (CRM interne) */
+    {
+      slug: 'architectes_partenaires',
+      labels: {
+        singular: 'Architecte partenaire',
+        plural: 'Architectes partenaires',
+      },
+      admin: {
+        useAsTitle: 'nom',
+        defaultColumns: ['nom', 'studio', 'niveau', 'actif'],
+        group: 'Partenaires',
+      },
+      fields: [
+        {
+          name: 'nom',
+          type: 'text',
+          required: true,
+          label: 'Nom complet',
+        },
+        {
+          name: 'studio',
+          type: 'text',
+          label: 'Studio / Cabinet',
+        },
+        {
+          name: 'lieu',
+          type: 'text',
+          label: 'Lieu (Paris, IDF…)',
+        },
+        {
+          name: 'email_contact',
+          type: 'email',
+          label: 'Email de contact',
+        },
+        {
+          name: 'telephone',
+          type: 'text',
+          label: 'Téléphone',
+        },
+        {
+          name: 'site_web',
+          type: 'text',
+          label: 'Site web (URL)',
+        },
+        {
+          name: 'specialites',
+          type: 'array',
+          label: 'Spécialités',
+          fields: [
+            {
+              name: 'texte',
+              type: 'text',
+              required: true,
+              label: 'Spécialité',
+            },
+          ],
+        },
+        {
+          name: 'photo',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Photo / Logo',
+        },
+        {
+          name: 'partenaire_depuis',
+          type: 'date',
+          label: 'Partenaire depuis',
+        },
+        {
+          name: 'projets_realises_ensemble',
+          type: 'relationship',
+          relationTo: 'realisations',
+          hasMany: true,
+          label: 'Réalisations communes',
+        },
+        {
+          name: 'taux_commission',
+          type: 'number',
+          label: 'Taux de commission (%)',
+          admin: {
+            position: 'sidebar',
+          },
+        },
+        {
+          name: 'niveau',
+          type: 'select',
+          label: 'Niveau de partenariat',
+          options: [
+            { label: 'Apporteur ponctuel', value: 'apporteur' },
+            { label: 'Partenaire récurrent', value: 'recurrent' },
+            { label: 'Premium', value: 'premium' },
+          ],
+          admin: {
+            position: 'sidebar',
+          },
+        },
+        {
+          name: 'actif',
+          type: 'checkbox',
+          defaultValue: true,
+          label: 'Partenaire actif',
+          admin: {
+            position: 'sidebar',
+          },
+        },
+        {
+          name: 'notes_internes',
+          type: 'richText',
+          editor: lexicalEditor({}),
+          label: 'Notes internes (non public)',
+        },
+      ],
+    },
+
+    /* Demandes architectes (formulaire /architectes) */
+    {
+      slug: 'demandes_architectes',
+      labels: {
+        singular: 'Demande architecte',
+        plural: 'Demandes architectes',
+      },
+      admin: {
+        useAsTitle: 'nom',
+        defaultColumns: ['nom', 'studio', 'email', 'createdAt'],
+        group: 'Partenaires',
+      },
+      fields: [
+        {
+          name: 'nom',
+          type: 'text',
+          required: true,
+          label: 'Nom',
+        },
+        {
+          name: 'studio',
+          type: 'text',
+          label: 'Studio / Cabinet',
+        },
+        {
+          name: 'email',
+          type: 'email',
+          required: true,
+          label: 'Email',
+        },
+        {
+          name: 'telephone',
+          type: 'text',
+          label: 'Téléphone',
+        },
+        {
+          name: 'site',
+          type: 'text',
+          label: 'Site web',
+        },
+        {
+          name: 'projet',
+          type: 'textarea',
+          label: 'Nature du projet à venir',
+        },
+        {
+          name: 'message',
+          type: 'textarea',
+          required: true,
+          label: 'Message',
+        },
+      ],
+    },
+
     /* Demandes de contact */
     {
       slug: 'inquiries',

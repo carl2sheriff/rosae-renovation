@@ -17,6 +17,8 @@ export interface Config {
     services: Service
     engagements: Engagement
     temoignages: Temoignage
+    architectes_partenaires: ArchitectePartenaire
+    demandes_architectes: DemandeArchitecte
     inquiries: Inquiry
     'payload-preferences': PayloadPreference
     'payload-migrations': PayloadMigration
@@ -179,6 +181,56 @@ export interface Temoignage {
   note?: ('5' | '4' | '3') | null
   published?: boolean | null
   order?: number | null
+  updatedAt: string
+  createdAt: string
+}
+
+export interface ArchitectePartenaire {
+  id: number
+  nom: string
+  studio?: string | null
+  lieu?: string | null
+  email_contact?: string | null
+  telephone?: string | null
+  site_web?: string | null
+  specialites?: {
+    texte: string
+    id?: string | null
+  }[] | null
+  photo?: number | Media | null
+  partenaire_depuis?: string | null
+  projets_realises_ensemble?: (number | Realisation)[] | null
+  taux_commission?: number | null
+  niveau?: ('apporteur' | 'recurrent' | 'premium') | null
+  actif?: boolean | null
+  notes_internes?: {
+    root: {
+      type: string
+      children: {
+        type: string
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
+  updatedAt: string
+  createdAt: string
+}
+
+export interface DemandeArchitecte {
+  id: number
+  nom: string
+  studio?: string | null
+  email: string
+  telephone?: string | null
+  site?: string | null
+  projet?: string | null
+  message: string
   updatedAt: string
   createdAt: string
 }

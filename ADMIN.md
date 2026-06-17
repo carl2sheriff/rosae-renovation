@@ -203,6 +203,42 @@ Les prospects qui remplissent le formulaire sur la page Contact sont enregistré
 
 ---
 
+## 5d. Gérer les architectes partenaires
+
+Le programme partenaires comprend deux espaces dans l'admin : le **CRM architectes** (vos contacts) et les **demandes entrantes** (formulaire /architectes).
+
+### Consulter les demandes entrantes
+
+1. Dans le menu de gauche, section **Partenaires**, cliquez sur **Demandes architectes**
+2. Chaque entrée contient : nom, studio, email, téléphone, site, description du projet, message et date
+3. Vous recevez également une notification email à `rosaerenovation@gmail.com` dès qu'une demande est soumise
+
+### Créer ou modifier une fiche architecte partenaire
+
+1. Dans le menu de gauche, section **Partenaires**, cliquez sur **Architectes partenaires**
+2. Pour créer une nouvelle fiche : cliquez sur **Créer un nouvel Architecte partenaire**
+3. Champs principaux :
+   - **Nom complet** — prénom et nom de l'architecte
+   - **Studio / Cabinet** — nom de la structure
+   - **Lieu** — ville ou zone géographique
+   - **Email de contact** — adresse email professionnelle
+   - **Téléphone** — numéro direct
+   - **Site web** — URL du site (commencez par `https://`)
+   - **Spécialités** — ajoutez autant de lignes que nécessaire (ex : *Haussmannien*, *Minimaliste*)
+   - **Photo / Logo** — photo de profil ou logo du studio
+   - **Partenaire depuis** — date de début de la collaboration
+   - **Réalisations communes** — liez les projets Rosae co-réalisés
+   - **Notes internes** — espace libre pour vos observations (non public)
+4. Colonne de droite :
+   - **Taux de commission (%)** — ex : `4` pour 4 %
+   - **Niveau de partenariat** — Apporteur ponctuel / Partenaire récurrent / Premium
+   - **Partenaire actif** — décochez si la collaboration est suspendue
+5. Cliquez sur **Sauvegarder les modifications**
+
+> Les fiches architectes sont **internes** : elles n'apparaissent jamais sur le site public.
+
+---
+
 ## Récapitulatif rapide
 
 | Action | Où aller dans l'admin |
@@ -218,3 +254,5 @@ Les prospects qui remplissent le formulaire sur la page Contact sont enregistré
 | Ajouter un témoignage | Contenu → Témoignages |
 | Voir les demandes de contact | Administration → Demandes de contact |
 | Gérer les photos | Contenu → Médias |
+| Voir les demandes partenaires archi | Partenaires → Demandes architectes |
+| Gérer les fiches architectes | Partenaires → Architectes partenaires |

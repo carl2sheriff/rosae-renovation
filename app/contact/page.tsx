@@ -186,7 +186,6 @@ export default async function ContactPage() {
             )}
           </div>
         </section>
-      </main>
 
         {/* ── Formulaire de contact ─────────────── */}
         <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">

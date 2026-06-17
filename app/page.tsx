@@ -1,7 +1,7 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { HomePage } from "./_components/HomePage";
-import type { HomePageProps, ProjectCard, ServiceCard, EngagementCard } from "./_components/HomePage";
+import type { HomePageProps, ProjectCard, ServiceCard, EngagementCard, TemoignageCard } from "./_components/HomePage";
 import type { Media, Realisation } from "@/payload-types";
 
 export const dynamic = 'force-dynamic';
@@ -89,7 +89,7 @@ async function fetchData(): Promise<HomePageProps | null> {
   try {
     const payload = await getPayload({ config: configPromise });
 
-    const [realisations, services, engagements, contact, home] =
+    const [realisations, services, engagements, temoignagesRes, contact, home] =
       await Promise.all([
         payload.find({
           collection: "realisations",
@@ -100,6 +100,12 @@ async function fetchData(): Promise<HomePageProps | null> {
         }),
         payload.find({ collection: "services", sort: "order", limit: 10 }),
         payload.find({ collection: "engagements", sort: "order", limit: 10 }),
+        payload.find({
+          collection: "temoignages",
+          where: { published: { equals: true } },
+          sort: "order",
+          limit: 6,
+        }),
         payload.findGlobal({ slug: "contact" }),
         payload.findGlobal({ slug: "home", depth: 1 }),
       ]);
@@ -126,6 +132,12 @@ async function fetchData(): Promise<HomePageProps | null> {
       desc: e.description,
     }));
 
+    const temoignageCards: TemoignageCard[] = temoignagesRes.docs.map((t) => ({
+      nomClient: t.nom_client,
+      projet: t.projet ?? undefined,
+      texte: t.texte,
+    }));
+
     const heroImageUrl =
       typeof home.hero_image === "object" && home.hero_image
         ? (home.hero_image as Media).sizes?.hero?.url ??
@@ -147,6 +159,7 @@ async function fetchData(): Promise<HomePageProps | null> {
       services: serviceCards.length > 0 ? serviceCards : FALLBACK.services,
       engagements:
         engagementCards.length > 0 ? engagementCards : FALLBACK.engagements,
+      temoignages: temoignageCards.length > 0 ? temoignageCards : undefined,
       contact: {
         ctaTitle: contact.cta_title ?? FALLBACK.contact.ctaTitle,
         ctaSubtitle: contact.cta_subtitle ?? FALLBACK.contact.ctaSubtitle,

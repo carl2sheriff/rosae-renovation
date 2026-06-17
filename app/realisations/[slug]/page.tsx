@@ -3,6 +3,7 @@ import configPromise from "@payload-config";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/app/_components/SiteNav";
 import { SiteFooter } from "@/app/_components/SiteFooter";
+import { Gallery } from "@/app/_components/Gallery";
 import type { Media, Realisation } from "@/payload-types";
 import type { Metadata } from "next";
 
@@ -99,6 +100,39 @@ function extractTextFromLexical(doc: Record<string, unknown> | null | undefined)
     .filter(Boolean);
 }
 
+interface Neighbor {
+  slug: string;
+  title: string;
+}
+
+async function fetchNeighbors(
+  slug: string
+): Promise<{ prev: Neighbor | null; next: Neighbor | null }> {
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const { docs } = await payload.find({
+      collection: "realisations",
+      where: { published: { equals: true } },
+      sort: "order",
+      limit: 100,
+      depth: 0,
+    });
+    const index = docs.findIndex((r) => r.slug === slug);
+    if (index === -1) return { prev: null, next: null };
+    const prev =
+      index > 0
+        ? { slug: docs[index - 1].slug ?? "", title: docs[index - 1].title }
+        : null;
+    const next =
+      index < docs.length - 1
+        ? { slug: docs[index + 1].slug ?? "", title: docs[index + 1].title }
+        : null;
+    return { prev, next };
+  } catch {
+    return { prev: null, next: null };
+  }
+}
+
 async function getProject(slug: string): Promise<ProjectData | null> {
   try {
     const payload = await getPayload({ config: configPromise });
@@ -184,7 +218,10 @@ export default async function RealisationDetail({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const [project, { prev, next }] = await Promise.all([
+    getProject(slug),
+    fetchNeighbors(slug),
+  ]);
   const demo = DEMO_PROJECTS[slug];
 
   if (!project && !demo) {
@@ -330,21 +367,7 @@ export default async function RealisationDetail({
               </span>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-              {rest.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={src + i}
-                  src={src}
-                  alt={`${data.title} — vue ${i + 2}`}
-                  loading="lazy"
-                  className="w-full object-cover"
-                  style={{
-                    height: i % 3 === 1 ? "clamp(200px, 32vh, 380px)" : "clamp(180px, 26vh, 320px)",
-                  }}
-                />
-              ))}
-            </div>
+            <Gallery images={rest} altBase={data.title} />
 
             {data.photographe && (
               <p
@@ -381,15 +404,72 @@ export default async function RealisationDetail({
           </div>
         </section>
 
-        {/* ── Back nav ────────────────────────────── */}
-        <div className="mx-auto max-w-6xl px-5 pb-12 sm:px-6">
-          <a
-            href="/realisations"
-            className="back-link text-[11px] uppercase tracking-[0.13em] transition-colors duration-300"
-            style={{ color: "var(--text-2)" }}
-          >
-            ← Toutes les réalisations
-          </a>
+        {/* ── Prev / Next navigation ──────────────── */}
+        <div
+          className="mx-auto max-w-6xl px-5 pb-16 sm:px-6"
+          style={{ borderTop: "1px solid var(--line)" }}
+        >
+          <div className="flex items-center justify-between pt-8 gap-4">
+            <div className="flex-1">
+              {prev && (
+                <a
+                  href={`/realisations/${prev.slug}`}
+                  className="group flex flex-col gap-1"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <span
+                    className="text-[10px] uppercase tracking-[0.12em] transition-colors duration-300"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    ← Précédent
+                  </span>
+                  <span
+                    className="font-serif italic text-[14px] sm:text-[15px] transition-colors duration-300"
+                    style={{ color: "var(--text-2)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-2)")}
+                  >
+                    {prev.title}
+                  </span>
+                </a>
+              )}
+            </div>
+
+            <a
+              href="/realisations"
+              className="shrink-0 text-[10px] uppercase tracking-[0.12em] transition-colors duration-300"
+              style={{ color: "var(--text-2)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-2)")}
+            >
+              Toutes
+            </a>
+
+            <div className="flex-1 text-right">
+              {next && (
+                <a
+                  href={`/realisations/${next.slug}`}
+                  className="group inline-flex flex-col gap-1 items-end"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <span
+                    className="text-[10px] uppercase tracking-[0.12em] transition-colors duration-300"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    Suivant →
+                  </span>
+                  <span
+                    className="font-serif italic text-[14px] sm:text-[15px] transition-colors duration-300"
+                    style={{ color: "var(--text-2)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-2)")}
+                  >
+                    {next.title}
+                  </span>
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       </main>
 

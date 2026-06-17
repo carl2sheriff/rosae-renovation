@@ -16,6 +16,8 @@ export interface Config {
     realisations: Realisation
     services: Service
     engagements: Engagement
+    temoignages: Temoignage
+    inquiries: Inquiry
     'payload-preferences': PayloadPreference
     'payload-migrations': PayloadMigration
   }
@@ -165,6 +167,29 @@ export interface Engagement {
   title: string
   description: string
   order?: number | null
+  updatedAt: string
+  createdAt: string
+}
+
+export interface Temoignage {
+  id: number
+  nom_client: string
+  projet?: string | null
+  texte: string
+  note?: ('5' | '4' | '3') | null
+  published?: boolean | null
+  order?: number | null
+  updatedAt: string
+  createdAt: string
+}
+
+export interface Inquiry {
+  id: number
+  nom: string
+  email: string
+  telephone?: string | null
+  message: string
+  projet_type?: ('complet' | 'partiel' | 'amenagement' | 'autre') | null
   updatedAt: string
   createdAt: string
 }

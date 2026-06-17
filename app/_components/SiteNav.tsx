@@ -53,6 +53,7 @@ export function SiteNav({ activePath = "/" }: { activePath?: string }) {
           className="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 -mr-1 items-center"
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
           onClick={() => setMenuOpen((o) => !o)}
         >
           <span
@@ -81,6 +82,7 @@ export function SiteNav({ activePath = "/" }: { activePath?: string }) {
 
       {menuOpen && (
         <div
+          id="mobile-nav"
           className="md:hidden border-t"
           style={{
             borderColor: "var(--line)",

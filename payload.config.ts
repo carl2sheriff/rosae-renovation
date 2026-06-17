@@ -297,6 +297,113 @@ export default buildConfig({
         },
       ],
     },
+
+    /* Témoignages */
+    {
+      slug: 'temoignages',
+      labels: {
+        singular: 'Témoignage',
+        plural: 'Témoignages',
+      },
+      admin: {
+        useAsTitle: 'nom_client',
+        defaultColumns: ['nom_client', 'projet', 'published', 'order'],
+        group: 'Contenu',
+      },
+      fields: [
+        {
+          name: 'nom_client',
+          type: 'text',
+          required: true,
+          label: 'Nom du client',
+        },
+        {
+          name: 'projet',
+          type: 'text',
+          label: 'Projet (ex : Appartement — Paris 7e)',
+        },
+        {
+          name: 'texte',
+          type: 'textarea',
+          required: true,
+          label: 'Texte du témoignage',
+        },
+        {
+          name: 'note',
+          type: 'select',
+          label: 'Note',
+          options: [
+            { label: '5 / 5', value: '5' },
+            { label: '4 / 5', value: '4' },
+            { label: '3 / 5', value: '3' },
+          ],
+        },
+        {
+          name: 'published',
+          type: 'checkbox',
+          defaultValue: true,
+          admin: { position: 'sidebar' },
+          label: 'Publié',
+        },
+        {
+          name: 'order',
+          type: 'number',
+          defaultValue: 0,
+          admin: { position: 'sidebar' },
+          label: "Ordre d'affichage",
+        },
+      ],
+    },
+
+    /* Demandes de contact */
+    {
+      slug: 'inquiries',
+      labels: {
+        singular: 'Demande de contact',
+        plural: 'Demandes de contact',
+      },
+      admin: {
+        useAsTitle: 'nom',
+        defaultColumns: ['nom', 'email', 'projet_type', 'createdAt'],
+        group: 'Administration',
+      },
+      fields: [
+        {
+          name: 'nom',
+          type: 'text',
+          required: true,
+          label: 'Nom',
+        },
+        {
+          name: 'email',
+          type: 'email',
+          required: true,
+          label: 'Email',
+        },
+        {
+          name: 'telephone',
+          type: 'text',
+          label: 'Téléphone',
+        },
+        {
+          name: 'message',
+          type: 'textarea',
+          required: true,
+          label: 'Message',
+        },
+        {
+          name: 'projet_type',
+          type: 'select',
+          label: 'Type de projet',
+          options: [
+            { label: 'Rénovation complète', value: 'complet' },
+            { label: 'Rénovation partielle', value: 'partiel' },
+            { label: 'Aménagement', value: 'amenagement' },
+            { label: 'Autre', value: 'autre' },
+          ],
+        },
+      ],
+    },
   ],
 
   /* ─── Globals ───────────────────────────────────────────── */

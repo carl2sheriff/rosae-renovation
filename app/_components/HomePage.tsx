@@ -59,6 +59,12 @@ export interface EngagementCard {
   desc: string;
 }
 
+export interface TemoignageCard {
+  nomClient: string;
+  projet?: string;
+  texte: string;
+}
+
 export interface ContactData {
   ctaTitle: string;
   ctaSubtitle: string;
@@ -70,6 +76,7 @@ export interface HomePageProps {
   projects: ProjectCard[];
   services: ServiceCard[];
   engagements: EngagementCard[];
+  temoignages?: TemoignageCard[];
   contact: ContactData;
   heroImageUrl?: string;
   citation?: {
@@ -84,6 +91,7 @@ export function HomePage({
   projects,
   services,
   engagements,
+  temoignages,
   contact,
   heroImageUrl,
   citation,
@@ -478,6 +486,60 @@ export function HomePage({
           ))}
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════
+          TÉMOIGNAGES
+      ══════════════════════════════════════════ */}
+      {temoignages && temoignages.length > 0 && (
+        <section
+          id="temoignages"
+          className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 md:pb-28"
+        >
+          <FadeIn>
+            <div
+              className="mb-10 border-t pt-8"
+              style={{ borderColor: "var(--line)" }}
+            >
+              <span
+                className="text-[11px] uppercase tracking-[0.13em]"
+                style={{ color: "var(--accent)" }}
+              >
+                Ce que disent nos clients
+              </span>
+            </div>
+          </FadeIn>
+          <div className="flex flex-col gap-10 md:gap-14 max-w-[680px]">
+            {temoignages.map((t, i) => (
+              <FadeIn key={t.nomClient + i} delay={i * 100}>
+                <blockquote>
+                  <p
+                    className="font-serif italic leading-[1.85]"
+                    style={{
+                      fontSize: "clamp(15px, 1.5vw, 19px)",
+                      color: "var(--text-1)",
+                    }}
+                  >
+                    &ldquo;{t.texte}&rdquo;
+                  </p>
+                  <footer className="mt-5">
+                    <p
+                      className="text-[10px] uppercase tracking-[0.14em]"
+                      style={{ color: "var(--accent)" }}
+                    >
+                      — {t.nomClient}
+                      {t.projet && (
+                        <span style={{ color: "var(--text-2)" }}>
+                          {" "}/ {t.projet}
+                        </span>
+                      )}
+                    </p>
+                  </footer>
+                </blockquote>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ══════════════════════════════════════════
           CONTACT

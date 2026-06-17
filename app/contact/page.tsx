@@ -3,6 +3,7 @@ import configPromise from "@payload-config";
 import { SiteNav } from "@/app/_components/SiteNav";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import { CalComEmbed } from "@/app/_components/CalComEmbed";
+import { ContactForm } from "@/app/_components/ContactForm";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -183,6 +184,38 @@ export default async function ContactPage() {
                 </a>
               </div>
             )}
+          </div>
+        </section>
+      </main>
+
+        {/* ── Formulaire de contact ─────────────── */}
+        <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 md:pb-36">
+          <div
+            className="border-t pt-12"
+            style={{ borderColor: "var(--line)" }}
+          >
+            <p
+              className="text-[11px] uppercase tracking-[0.13em] mb-4"
+              style={{ color: "var(--accent)" }}
+            >
+              Message
+            </p>
+            <h2
+              className="font-serif italic mb-3"
+              style={{
+                fontSize: "clamp(18px, 2.2vw, 26px)",
+                lineHeight: 1.25,
+              }}
+            >
+              Nous écrire directement
+            </h2>
+            <p
+              className="text-sm leading-[1.9] mb-8 max-w-md"
+              style={{ color: "var(--text-2)" }}
+            >
+              Décrivez votre projet — nous vous répondrons sous 48 h.
+            </p>
+            <ContactForm />
           </div>
         </section>
       </main>

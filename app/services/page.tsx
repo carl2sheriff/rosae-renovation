@@ -16,17 +16,17 @@ const FALLBACK_SERVICES = [
   {
     num: "01",
     title: "Rénovation complète",
-    desc: "Prise en charge globale des travaux, avec une organisation structurée et une exécution maîtrisée à chaque phase du chantier.",
+    desc: "Nous prenons en charge l'intégralité du chantier — démolition, gros œuvre, lots techniques, finitions — et coordonnons chaque corps de métier jusqu'à la livraison. Un interlocuteur unique, du devis aux clés.",
   },
   {
     num: "02",
     title: "Coordination des corps de métier",
-    desc: "Pilotage des différents intervenants, planification précise et suivi constant de l'avancement du chantier.",
+    desc: "Chaque chantier est planifié semaine par semaine avant même le démarrage. Les intervenants sont coordonnés en amont. Les aléas sont anticipés, pas subis.",
   },
   {
     num: "03",
-    title: "Qualité des finitions",
-    desc: "Attention portée aux détails et aux ouvrages, avec un contrôle rigoureux jusqu'à la livraison.",
+    title: "Rigueur des finitions",
+    desc: "La réception se fait avec vous, point par point. Rien n'est livré tant que la réserve n'est pas levée. C'est la différence entre finir un chantier et terminer un ouvrage.",
   },
 ];
 
@@ -54,7 +54,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg)", color: "var(--text-1)" }}>
-      <SiteNav activePath="/services" />
+      <SiteNav />
 
       <main>
         {/* ── Header ──────────────────────────────────── */}

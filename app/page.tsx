@@ -38,41 +38,41 @@ const FALLBACK: HomePageProps = {
     {
       num: "01",
       title: "Rénovation complète",
-      desc: "Prise en charge globale des travaux, avec une organisation structurée et une exécution maîtrisée à chaque phase du chantier.",
+      desc: "Nous prenons en charge l'intégralité du chantier — démolition, gros œuvre, lots techniques, finitions — et coordonnons chaque corps de métier jusqu'à la livraison. Un interlocuteur unique, du devis aux clés.",
     },
     {
       num: "02",
       title: "Coordination des corps de métier",
-      desc: "Pilotage des différents intervenants, planification précise et suivi constant de l'avancement du chantier.",
+      desc: "Chaque chantier est planifié semaine par semaine avant même le démarrage. Les intervenants sont coordonnés en amont. Les aléas sont anticipés, pas subis.",
     },
     {
       num: "03",
-      title: "Qualité des finitions",
-      desc: "Attention portée aux détails et aux ouvrages, avec un contrôle rigoureux jusqu'à la livraison.",
+      title: "Rigueur des finitions",
+      desc: "La réception se fait avec vous, point par point. Rien n'est livré tant que la réserve n'est pas levée. C'est la différence entre finir un chantier et terminer un ouvrage.",
     },
   ],
   engagements: [
     {
       title: "Exécution fidèle",
-      desc: "Réalisation dans le respect strict des plans, des détails et des choix validés avec le client.",
+      desc: "Chaque choix validé avec vous est respecté jusqu'au détail. Plans, matériaux, finitions — sans déviation non discutée.",
     },
     {
       title: "Tenue de chantier",
-      desc: "Planification claire, coordination des équipes et suivi régulier de l'avancement.",
+      desc: "Un planning établi avant le démarrage, tenu jusqu'à la livraison. Les équipes sont coordonnées, les sous-traitants sélectionnés avec soin.",
     },
     {
-      title: "Communication directe",
-      desc: "Des échanges structurés pour un suivi fluide du projet, sans zones d'ombre.",
+      title: "Transparence totale",
+      desc: "Points d'avancement réguliers, sans filtre. Vous savez à tout moment où en est le chantier — et pourquoi.",
     },
     {
-      title: "Maîtrise des délais",
-      desc: "Des délais définis de manière réaliste et tenus jusqu'à la livraison.",
+      title: "Délais tenus",
+      desc: "Les délais sont définis de manière réaliste, dès le devis. Ils sont ensuite respectés — ou l'écart est expliqué avant qu'il ne devienne un problème.",
     },
   ],
   contact: {
     ctaTitle: "Parlons de votre projet.",
     ctaSubtitle:
-      "Pour toute demande, contactez-nous afin d'échanger sur vos besoins, le cadre de l'intervention et les premières étapes à envisager.",
+      "Prenez contact pour un premier échange — sans engagement. Nous écoutons avant de proposer.",
     phone: "+33 1 00 00 00 00",
     email: "rosaerenovation@gmail.com",
   },

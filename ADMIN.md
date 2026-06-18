@@ -239,11 +239,82 @@ Le programme partenaires comprend deux espaces dans l'admin : le **CRM architect
 
 ---
 
+## 5e. Gérer les abonnés newsletter (Carnet Rosae)
+
+Les visiteurs qui s'inscrivent via le formulaire /journal sont enregistrés dans l'admin.
+
+1. Dans le menu de gauche, section **Administration**, cliquez sur **Abonnés newsletter**
+2. Chaque entrée contient : email, prénom (optionnel), source, date d'inscription
+3. Vous pouvez exporter la liste ou la consulter depuis cet écran
+
+---
+
+## 5f. Ajouter une vidéo hero (page d'accueil)
+
+La page d'accueil peut afficher une vidéo à la place de la photo hero.
+
+1. Dans le menu de gauche, section **Paramètres**, cliquez sur **Page d'accueil**
+2. Dans le champ **Vidéo hero (URL)**, collez l'URL directe de votre fichier mp4 ou m3u8
+   - La vidéo doit être hébergée sur un CDN ou Vercel Blob
+   - Exemple : `https://xxx.public.blob.vercel-storage.com/hero.mp4`
+3. Si renseignée, la vidéo remplace la photo hero (la photo reste affichée comme poster pendant le chargement)
+4. Pour revenir à la photo, videz simplement le champ
+
+---
+
+## À faire — rappels opérationnels
+
+### Cal.com — Prise de rendez-vous en ligne
+
+**À configurer dès que possible.** Le site est prêt à afficher le calendrier Cal.com sur la page Contact.
+
+1. Créez un compte sur [cal.com](https://cal.com) avec votre email professionnel
+2. Créez un "Event Type" : **Visite de chantier — 30 min** (ou similaire)
+3. Configurez vos disponibilités dans Cal.com
+4. Copiez la partie de l'URL après `cal.com/` (ex : `rosae-renovation/visite`)
+5. Collez-la dans **Paramètres → Contact → Lien Cal.com** dans l'admin
+
+### Google Business Profile (GBP)
+
+Votre fiche Google Business Profile est un levier SEO local majeur.
+
+- **Compléter la fiche** : adresse, téléphone, horaires, description, catégorie principale
+- **Ajouter des photos** : photos de réalisations, photos d'équipe, photo de l'agence
+- **Recueillir des avis** : envoyer le lien de demande d'avis à chaque client satisfait après livraison
+- **Publier des posts** : actualités, projets récents, conseils — au moins 1 par mois
+
+### Pinterest — Réalisations
+
+Pinterest est un canal de découverte important pour la rénovation et la décoration.
+
+- Créer un compte professionnel Pinterest au nom de **Rosae Rénovation**
+- Créer des tableaux thématiques : *Appartements Paris*, *Cuisines*, *Salles de bain*, *Avant / Après*, etc.
+- Épingler les photos de chaque réalisation avec une description optimisée
+- Lier chaque épingle à la page de la réalisation sur le site
+
+### Photos de réalisations
+
+Pour maximiser l'impact visuel du site et des réseaux sociaux :
+
+- Faire appel à un photographe professionnel pour les 3 prochains projets livrés
+- Format recommandé : JPEG, 1800–3000 px de large, lumière naturelle
+- Chaque projet = 8 à 15 photos (vue d'ensemble, détails, avant/après si possible)
+- Uploader dans l'admin via **Contenu → Médias** puis lier à la réalisation correspondante
+
+### Parcours client — Formulaires de contact
+
+- Consulter **Administration → Demandes de contact** au moins 2 fois par semaine
+- Répondre sous 24h ouvrées à chaque demande
+- Envisager avec Carl la mise en place d'une notification email automatique à chaque nouvelle demande
+
+---
+
 ## Récapitulatif rapide
 
 | Action | Où aller dans l'admin |
 |--------|----------------------|
 | Modifier la grande photo d'accueil | Paramètres → Page d'accueil |
+| Ajouter une vidéo hero | Paramètres → Page d'accueil → Vidéo hero |
 | Modifier le texte d'intro | Paramètres → Page d'accueil |
 | Modifier la citation Stéphane Beilin | Paramètres → Page d'accueil |
 | Modifier les coordonnées | Paramètres → Contact |
@@ -253,6 +324,7 @@ Le programme partenaires comprend deux espaces dans l'admin : le **CRM architect
 | Modifier un engagement | Contenu → Engagements |
 | Ajouter un témoignage | Contenu → Témoignages |
 | Voir les demandes de contact | Administration → Demandes de contact |
+| Voir les abonnés newsletter | Administration → Abonnés newsletter |
 | Gérer les photos | Contenu → Médias |
 | Voir les demandes partenaires archi | Partenaires → Demandes architectes |
 | Gérer les fiches architectes | Partenaires → Architectes partenaires |

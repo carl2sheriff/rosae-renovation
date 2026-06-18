@@ -253,6 +253,7 @@ export function HomePage({
                   <a
                     href={`/realisations/${p.slug}`}
                     className="group block"
+                    data-cursor-voir
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <div className="overflow-hidden">
@@ -297,6 +298,7 @@ export function HomePage({
                 <a
                   href={`/realisations/${projects[0].slug}`}
                   className="group block"
+                  data-cursor-voir
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
                   <div className="overflow-hidden">
@@ -340,6 +342,7 @@ export function HomePage({
                       <a
                         href={`/realisations/${p.slug}`}
                         className="group block"
+                        data-cursor-voir
                         style={{ color: "inherit", textDecoration: "none" }}
                       >
                         <div className="overflow-hidden">

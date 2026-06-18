@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Inter } from "next/font/google";
+import { CursorVoir } from "./_components/CursorVoir";
 import "./globals.css";
 
 const ebGaramond = EB_Garamond({
@@ -73,6 +74,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Aller au contenu
         </a>
+        <CursorVoir />
         {children}
       </body>
     </html>

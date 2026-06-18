@@ -6,15 +6,20 @@ export function SiteFooter() {
         style={{ color: "var(--accent)" }}
       >
         <span>Rosae — Entreprise générale du bâtiment, Paris</span>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap gap-6">
           <a href="/contact" className="transition-opacity duration-300 hover:opacity-70">
             Contact
           </a>
-          <a href="/architectes" className="transition-opacity duration-300 hover:opacity-70">
-            Architectes
-          </a>
           <a href="/partenaires" className="transition-opacity duration-300 hover:opacity-70">
             Partenaires
+          </a>
+          <a
+            href="https://www.instagram.com/rosae_renovation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-opacity duration-300 hover:opacity-70"
+          >
+            Instagram
           </a>
           <a href="/mentions-legales" className="transition-opacity duration-300 hover:opacity-70">
             Mentions légales

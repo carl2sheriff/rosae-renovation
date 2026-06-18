@@ -542,43 +542,6 @@ export function HomePage({
       )}
 
       {/* ══════════════════════════════════════════
-          CTA ARCHITECTES
-      ══════════════════════════════════════════ */}
-      <section className="mx-auto max-w-6xl px-5 sm:px-6">
-        <div
-          className="border-t pt-14 pb-14 md:pt-20 md:pb-20 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8"
-          style={{ borderColor: 'var(--line)' }}
-        >
-          <div>
-            <p
-              className="text-[10px] uppercase tracking-[0.2em] mb-4"
-              style={{ color: 'var(--accent)' }}
-            >
-              Architectes d&apos;intérieur
-            </p>
-            <p
-              className="font-serif italic"
-              style={{
-                fontSize: 'clamp(18px, 2.2vw, 26px)',
-                color: 'var(--text-1)',
-                lineHeight: 1.3,
-                maxWidth: '32ch',
-              }}
-            >
-              Vous concevez, nous exécutons — sans jamais toucher à vos honoraires.
-            </p>
-          </div>
-          <a
-            href="/architectes"
-            className="shrink-0 text-[10px] uppercase tracking-[0.18em] border px-6 py-3 transition-all duration-300 hover:bg-[var(--text-1)] hover:text-[var(--bg)]"
-            style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
-          >
-            Programme partenaires →
-          </a>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
           CONTACT
       ══════════════════════════════════════════ */}
       <section

@@ -5,20 +5,17 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Partenaires — Rosae Rénovation",
   description:
-    "Rosae travaille avec un réseau d'architectes, de décorateurs et de spécialistes pour offrir une rénovation complète et cohérente.",
+    "Rosae collabore avec des architectes d'intérieur, des artisans spécialisés et des experts conseil pour garantir une rénovation d'exception.",
 };
 
+const ARCHITECTES = [
+  { nom: "Atelier Paluel Marmont", sigle: "APM" },
+  { nom: "Séverine de Lanversin", sigle: null },
+  { nom: "Stéphanie Délégué", sigle: null },
+  { nom: "Caroline des Cars", sigle: null },
+];
+
 const PARTENAIRES = [
-  {
-    categorie: "Architecture d'intérieur",
-    texte:
-      "Nous collaborons régulièrement avec des architectes d'intérieur qui nous confient l'exécution technique de leurs projets. Leur vision, notre rigueur d'exécution.",
-    profils: [
-      "Architectes d'intérieur CFAI / DPLG",
-      "Agences de design résidentiel",
-      "Cabinets de maîtrise d'œuvre",
-    ],
-  },
   {
     categorie: "Corps de métiers spécialisés",
     texte:
@@ -78,6 +75,53 @@ export default function PartenairesPage() {
           </div>
         </section>
 
+        {/* ── Architectes d'intérieur ─────────────── */}
+        <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6">
+          <div
+            className="grid gap-8 border-b pb-16 md:grid-cols-[1fr_1.4fr]"
+            style={{ borderColor: "var(--line)" }}
+          >
+            <div>
+              <h2
+                className="font-serif italic"
+                style={{ fontSize: "clamp(16px, 1.8vw, 22px)", lineHeight: 1.3 }}
+              >
+                Architectes d&apos;intérieur
+              </h2>
+              <p
+                className="mt-4 text-sm leading-[1.9]"
+                style={{ color: "var(--text-2)" }}
+              >
+                Nous collaborons avec des architectes d&apos;intérieur qui nous confient
+                l&apos;exécution technique de leurs projets. Leur vision, notre rigueur
+                d&apos;exécution — sans jamais empiéter sur leur relation client.
+              </p>
+            </div>
+            <ul className="flex flex-col gap-4 self-start mt-1">
+              {ARCHITECTES.map(({ nom, sigle }) => (
+                <li key={nom} className="flex items-baseline gap-3 text-sm">
+                  <span
+                    className="mt-[6px] h-[1px] w-4 shrink-0 inline-block"
+                    style={{ backgroundColor: "var(--accent)" }}
+                    aria-hidden="true"
+                  />
+                  <span style={{ color: "var(--text-1)" }}>
+                    {nom}
+                    {sigle && (
+                      <span
+                        className="ml-2 text-[11px] uppercase tracking-[0.1em]"
+                        style={{ color: "var(--accent)" }}
+                      >
+                        {sigle}
+                      </span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* ── Partenaires ─────────────────────────── */}
         {PARTENAIRES.map(({ categorie, texte, profils }) => (
           <section
@@ -128,10 +172,10 @@ export default function PartenairesPage() {
           >
             <div>
               <p className="font-serif italic text-[17px] sm:text-[19px]">
-                Vous êtes architecte ou décorateur ?
+                Une collaboration à envisager ?
               </p>
               <p className="mt-2 text-sm" style={{ color: "var(--text-2)" }}>
-                Nous sommes toujours à l&apos;écoute de nouvelles collaborations.
+                Architectes, décorateurs, maîtres d&apos;œuvre — nous sommes à l&apos;écoute.
               </p>
             </div>
             <a

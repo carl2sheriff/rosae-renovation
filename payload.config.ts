@@ -624,6 +624,14 @@ export default buildConfig({
           label: 'Image hero (grande photo en haut)',
         },
         {
+          name: 'hero_video_url',
+          type: 'text',
+          label: 'Vidéo hero (URL — mp4 ou m3u8, optionnel)',
+          admin: {
+            description: 'Si renseignée, la vidéo remplace la photo hero. Laisser vide pour utiliser uniquement la photo.',
+          },
+        },
+        {
           name: 'intro_text',
           type: 'richText',
           editor: lexicalEditor({}),

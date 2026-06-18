@@ -79,6 +79,7 @@ export interface HomePageProps {
   temoignages?: TemoignageCard[];
   contact: ContactData;
   heroImageUrl?: string;
+  heroVideoUrl?: string;
   citation?: {
     texte: string;
     auteurNom: string;
@@ -94,6 +95,7 @@ export function HomePage({
   temoignages,
   contact,
   heroImageUrl,
+  heroVideoUrl,
   citation,
 }: HomePageProps) {
   return (
@@ -111,19 +113,33 @@ export function HomePage({
         style={{ height: "clamp(320px, 88vh, 900px)" }}
         aria-label="Image de présentation"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={
-            heroImageUrl ||
-            "https://images.unsplash.com/photo-1644589104114-41ea93fc02e7?auto=format&fit=crop&w=1800&q=85"
-          }
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          fetchPriority="high"
-          className="h-full w-full object-cover"
-          style={{ objectPosition: "center 40%" }}
-        />
+        {heroVideoUrl ? (
+          <video
+            src={heroVideoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: "center 40%" }}
+            poster={heroImageUrl}
+          />
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={
+              heroImageUrl ||
+              "https://images.unsplash.com/photo-1644589104114-41ea93fc02e7?auto=format&fit=crop&w=1800&q=85"
+            }
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            fetchPriority="high"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: "center 40%" }}
+          />
+        )}
         <div
           className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
           style={{

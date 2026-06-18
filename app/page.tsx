@@ -145,6 +145,11 @@ async function fetchData(): Promise<HomePageProps | null> {
           undefined
         : undefined;
 
+    const heroVideoUrl =
+      typeof (home as { hero_video_url?: string }).hero_video_url === "string"
+        ? (home as { hero_video_url?: string }).hero_video_url || undefined
+        : undefined;
+
     const citation =
       home.citation_texte
         ? {
@@ -167,6 +172,7 @@ async function fetchData(): Promise<HomePageProps | null> {
         email: contact.email ?? FALLBACK.contact.email,
       },
       heroImageUrl,
+      heroVideoUrl,
       citation,
     };
   } catch {

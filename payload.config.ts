@@ -523,6 +523,40 @@ export default buildConfig({
       ],
     },
 
+    /* Newsletter — Carnet Rosae */
+    {
+      slug: 'newsletter_subscribers',
+      labels: {
+        singular: 'Abonné newsletter',
+        plural: 'Abonnés newsletter',
+      },
+      admin: {
+        useAsTitle: 'email',
+        defaultColumns: ['email', 'prenom', 'source', 'createdAt'],
+        group: 'Administration',
+      },
+      fields: [
+        {
+          name: 'email',
+          type: 'email',
+          required: true,
+          unique: true,
+          label: 'Adresse email',
+        },
+        {
+          name: 'prenom',
+          type: 'text',
+          label: 'Prénom (optionnel)',
+        },
+        {
+          name: 'source',
+          type: 'text',
+          label: 'Source (journal, footer…)',
+          admin: { position: 'sidebar' },
+        },
+      ],
+    },
+
     /* Demandes de contact */
     {
       slug: 'inquiries',

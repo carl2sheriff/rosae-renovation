@@ -232,6 +232,18 @@ export default async function ContactPage() {
                   q: "Comment gérez-vous les imprévus de chantier ?",
                   a: "Chaque chantier de rénovation réserve des surprises. Nous les documentons systématiquement, proposons des solutions et chiffrons toute modification avant d'agir — jamais de travaux supplémentaires sans votre accord écrit.",
                 },
+                {
+                  q: "Êtes-vous couverts par une assurance décennale ?",
+                  a: "Oui. Rosae Rénovation est titulaire d'une assurance décennale couvrant l'ensemble des travaux de construction et de rénovation que nous réalisons. Cette garantie couvre les dommages compromettant la solidité de l'ouvrage ou le rendant impropre à sa destination pendant 10 ans après la réception. L'attestation est disponible sur simple demande.",
+                },
+                {
+                  q: "Disposez-vous d'une responsabilité civile professionnelle ?",
+                  a: "Oui. Nous sommes couverts par une assurance RC Pro qui prend en charge les dommages causés aux tiers dans le cadre de notre activité. Elle couvre notamment les dommages matériels chez le client pendant le chantier. Nous pouvons vous transmettre l'attestation avant le démarrage des travaux.",
+                },
+                {
+                  q: "Quelles garanties s'appliquent après la livraison ?",
+                  a: "Trois garanties légales s'appliquent : la garantie de parfait achèvement (1 an) couvre toutes les réserves signalées à la réception ; la garantie biennale (2 ans) couvre les équipements dissociables de l'ouvrage ; la garantie décennale (10 ans) couvre les désordres affectant la structure ou l'étanchéité. Ces garanties sont d'ordre public et s'appliquent indépendamment de votre contrat.",
+                },
               ].map(({ q, a }) => (
                 <details
                   key={q}

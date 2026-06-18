@@ -65,6 +65,21 @@ Bienvenue dans votre espace de gestion. Ce guide vous explique comment modifier 
 
 > Le site se met à jour automatiquement dans la minute suivant la sauvegarde.
 
+### Remplacer les projets placeholder par vos vraies réalisations
+
+Le site contient actuellement **6 projets seed** (visuels Unsplash temporaires) en attente de vos vraies photos. Dès que vous avez les photos d'un chantier :
+
+1. Dans le menu de gauche, cliquez sur **Réalisations**
+2. Cliquez sur le projet seed correspondant (ex : *Restauration — Hôtel particulier · Paris 8e*)
+3. Dans **Image principale** : cliquez **Retirer**, puis **Ajouter** pour uploader votre photo
+4. Faites de même pour chaque image de la **Galerie photos**
+5. Mettez à jour le **Titre**, **Sous-titre**, **Lieu**, **Surface**, **Durée**, **Année** et la **Description narrative** avec vos vraies informations
+6. Cliquez sur **Sauvegarder les modifications**
+
+> Si vous préférez repartir d'une fiche vierge : créez une nouvelle réalisation, puis supprimez l'ancienne seed en décochant **Publié** d'abord (pour ne pas créer un trou visible sur le site).
+
+Les 6 projets seed sont identifiables dans la liste : ils ont tous les ordres 10, 20, 30, 40, 50 et 60.
+
 ---
 
 ## 4. Modifier les coordonnées
@@ -320,6 +335,7 @@ Pour maximiser l'impact visuel du site et des réseaux sociaux :
 | Modifier les coordonnées | Paramètres → Contact |
 | Activer Cal.com (prise de RDV) | Paramètres → Contact → Lien Cal.com |
 | Ajouter / modifier un projet | Contenu → Réalisations |
+| Remplacer un projet seed | Contenu → Réalisations → ouvrir le projet → remplacer photos + textes |
 | Modifier un service | Contenu → Services |
 | Modifier un engagement | Contenu → Engagements |
 | Ajouter un témoignage | Contenu → Témoignages |

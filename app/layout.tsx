@@ -37,9 +37,12 @@ const jsonLd = {
   description:
     "Entreprise générale du bâtiment spécialisée dans la rénovation d'intérieurs à Paris et en Île-de-France.",
   url: process.env.NEXT_PUBLIC_SERVER_URL || "https://rosae-renovation.fr",
+  telephone: "+33673551064",
   email: "rosaerenovation@gmail.com",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "29 rue du Faubourg Montmartre",
+    postalCode: "75009",
     addressLocality: "Paris",
     addressCountry: "FR",
   },

@@ -27,7 +27,7 @@ const FALLBACK: ContactData = {
   ctaTitle: "Parlons de votre projet.",
   ctaSubtitle:
     "Pour toute demande, contactez-nous afin d'échanger sur vos besoins, le cadre de l'intervention et les premières étapes à envisager.",
-  phone: "+33 1 00 00 00 00",
+  phone: "+33 6 73 55 10 64",
   email: "rosaerenovation@gmail.com",
 };
 

@@ -73,7 +73,7 @@ const FALLBACK: HomePageProps = {
     ctaTitle: "Parlons de votre projet.",
     ctaSubtitle:
       "Prenez contact pour un premier échange — sans engagement. Nous écoutons avant de proposer.",
-    phone: "+33 1 00 00 00 00",
+    phone: "+33 6 73 55 10 64",
     email: "rosaerenovation@gmail.com",
   },
 };

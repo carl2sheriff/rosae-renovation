@@ -35,9 +35,25 @@ export default function MentionsLegalesPage() {
             </p>
             <p>
               <strong>Rosae Rénovation</strong><br />
-              Entreprise générale du bâtiment<br />
-              Siège social : Paris, France<br />
+              SAS — entreprise générale du bâtiment<br />
+              Siège social : 29 rue du Faubourg Montmartre, 75009 Paris<br />
+              SIRET : 891 140 295 00017<br />
+              TVA intracommunautaire : FR17 891140295<br />
+              Téléphone : +33 6 73 55 10 64<br />
               Email : rosaerenovation@gmail.com
+            </p>
+          </Section>
+
+          <Section title="Assurances professionnelles">
+            <p>
+              Rosae Rénovation est titulaire d&apos;une assurance décennale (garantie de parfait achèvement,
+              garantie biennale, garantie décennale) couvrant l&apos;ensemble des travaux de construction
+              et de rénovation réalisés.
+            </p>
+            <p>
+              Une assurance responsabilité civile professionnelle couvre les dommages causés aux tiers
+              dans le cadre de l&apos;exercice de notre activité. Les attestations sont disponibles sur
+              simple demande.
             </p>
           </Section>
 
